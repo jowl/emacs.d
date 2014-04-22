@@ -8,8 +8,13 @@
 
 (setq default-directory (f-full (getenv "HOME")))
 (setq inhibit-startup-screen t)
+(setq-default indent-tabs-mode nil)
 (tool-bar-mode -1)
 (setq make-backup-files nil)
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
 (setq ring-bell-function 'ignore)
 (setq mac-option-key-is-meta t)
 (setq mac-command-key-is-meta nil)
@@ -27,15 +32,20 @@
 (load-theme 'slick t)
 (windmove-default-keybindings 'super)
 (show-paren-mode t)
-(bind-key "C-x C-c" (lambda () 
+(bind-key "C-x C-c" (lambda ()
 		      (interactive)
 		      (when (y-or-n-p "Quit Emacs?")
 			(save-buffers-kill-emacs))))
 (add-hook 'find-file-hook
           (lambda ()
             (setq show-trailing-whitespace t)))
+(fset 'yes-or-no-p 'y-or-n-p)
+(bind-key "C-v" (lambda () (interactive) (next-line 10) (recenter)))
+(bind-key "M-v" (lambda () (interactive) (previous-line 10) (recenter)))
 
 (defun load-local (file)
   (load (f-expand file user-emacs-directory)))
 
 (load-local "packages")
+(require 'ace-jump-mode)
+(bind-key "C-c SPC" 'ace-jump-mode)

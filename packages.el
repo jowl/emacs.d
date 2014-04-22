@@ -1,9 +1,17 @@
+(use-package exec-path-from-shell
+  :init (exec-path-from-shell-initialize))
+
 (use-package ansi-color)
 
 (use-package ido
   :init (ido-mode 1)
-  :config (setq ido-enable-flex-matching 1)
-)
+  :config (progn
+	    (setq ido-enable-flex-matching 1)
+	    (ido-everywhere 1)))
+
+(use-package flx-ido
+  :init (flx-ido-mode 1)
+  :config (setq ido-use-faces nil))
 
 (use-package ack-and-a-half)
 
@@ -30,28 +38,8 @@
 
 (use-package projectile
   :init (projectile-global-mode)
-  :config (progn 
-	    (setq projectile-require-project-root nil)
-	    (defun projectile-completion-fn (prompt choises)
-	      "Projectile completion function that only shows file name.
-
-               If two files have same name, new completion appears to select between
-               them. These include the path relative to the project root."
-	      (interactive)
-	      (let* ((stripped-choises
-		      (-uniq (--map (file-name-nondirectory it) choises)))
-		     (choise
-		      (ido-completing-read prompt stripped-choises))
-		     (matching-files
-		      (-filter
-		       (lambda (file)
-			 (equal (file-name-nondirectory file) choise))
-		       choises)))
-		(if (> (length matching-files) 1)
-		    (ido-completing-read prompt matching-files)
-		  (car matching-files))))
-
-	    (setq projectile-completion-system 'projectile-completion-fn)))
+  :config (progn
+	    (setq projectile-require-project-root nil)))
 
 (use-package powerline
   :init (powerline-default-theme)
@@ -60,15 +48,11 @@
     (setq powerline-default-separator nil)
     (setq powerline-default-separator-dir (quote (left . right)))))
 
-(use-package auto-complete
-  :init 
-  (progn
-    (use-package auto-complete-config)
-    (ac-config-default))
-  :config
-  (progn
-    (setq ac-use-fuzzy 1)
-    (setq ac-ignore-case nil)))
+(use-package company
+  :init (add-hook 'after-init-hook 'global-company-mode)
+  :config (progn
+            (setq company-idle-delay 0.1)
+            (setq company-show-numbers 1)))
 
 (use-package multiple-cursors
   :bind
@@ -86,7 +70,8 @@
   (progn
     (use-package smartparens-config)
     (smartparens-global-mode 1)
-    (setq sp-autoescape-string-quote nil))
+    (setq sp-autoescape-string-quote nil)
+    (show-smartparens-global-mode t))
   :bind
   (("C-)" . sp-forward-slurp-sexp)
    ("C-}" . sp-forward-barf-sexp)
@@ -136,3 +121,8 @@
 (use-package smex
   :init (smex-initialize)
   :bind ("M-x" . smex))
+
+(use-package gist)
+
+(use-package swoop
+  :bind ("M-s" . swoop))
