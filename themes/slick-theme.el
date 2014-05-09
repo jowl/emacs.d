@@ -113,6 +113,19 @@
  `(powerline-inactive1 ((t (:inherit mode-line :background ,slick-grey-1 :foreground ,slick-grey+1))))
  `(powerline-inactive2 ((t (:inherit mode-line :background ,slick-grey-1 :foreground ,slick-grey+1))))
 
+ `(company-echo-common ((t (:foreground ,slick-pink-0))))
+ `(company-preview ((t (:foreground ,slick-orange+1 :background ,slick-blue-2))))
+ `(company-preview-common ((t (:inherit company-preview :foreground ,slick-pink-0))))
+ `(company-preview-search ((t (:inherit company-preview :background ,slick-blue-1))))
+ `(company-tooltip ((t (:foreground ,slick-green-1 :background ,slick-grey-2))))
+ `(company-scrollbar-bg ((t (:inherit company-tooltip :background ,slick-grey+1))))
+ `(company-scrollbar-fg ((t (:inherit company-tooltip :background ,slick-pink-1))))
+ `(company-tooltip-annotation ((t (:inherit company-tooltip :foreground ,slick-orange+1))))
+ `(company-tooltip-common ((t (:inherit company-tooltip :foreground ,slick-orange-0))))
+ `(company-tooltip-selection ((t (:inherit company-tooltip :background ,slick-pink-2))))
+ `(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :foreground ,slick-pink-0))))
+
+
  `(isearch ((t (:foreground ,slick-orange-0 :background ,slick-grey-2))))
  `(isearch-fail ((t (:foreground ,slick-orange+2 :background ,slick-pink-0))))
  `(lazy-highlight ((t (:foreground ,slick-orange+1 :background ,slick-grey-2))))
@@ -120,3 +133,4 @@
  '(query-replace ((t (:inherit (isearch)))))
 
  `(default ((t (:family "Source_Code_Pro" :foundry "apple" :height 120 :foreground ,slick-orange+2 :background ,slick-grey-1)))))
+
