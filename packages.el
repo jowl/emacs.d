@@ -103,9 +103,9 @@
 		       ad-do-it))
                    (add-hook 'compilation-mode-hook
                              (lambda ()
-                               (local-set-key (kbd "g") (lambda ()
-                                                          (interactive)
-                                                          (when (eq major-mode 'rspec-compilation-mode)
+                               (when (eq major-mode 'rspec-compilation-mode)
+                                 (local-set-key (kbd "g") (lambda ()
+                                                            (interactive)
                                                             (rspec-rerun)))))))))
   :config (progn
             (setq ruby-deep-indent-paren nil)
