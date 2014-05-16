@@ -31,6 +31,7 @@
     (setq magit-stage-all-confirm nil)
     (setq magit-unstage-all-confirm nil)
     (setq magit-status-buffer-switch-function (quote switch-to-buffer))
+    (setq magit-diff-options (quote ("--histogram")))
     (add-hook 'magit-mode-hook (lambda () (bind-key "C-c , a" 'rspec-verify-all))))
   :bind
   (("C-c g" . magit-status)
