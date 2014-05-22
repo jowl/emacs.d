@@ -16,7 +16,9 @@
 (use-package ack-and-a-half)
 
 (use-package magit
-  :init (use-package evm)
+  :init (progn
+          (use-package magit-blame)
+          (use-package evm))
   :config
   (progn
     (setq magit-emacsclient-executable (evm-emacsclient))
