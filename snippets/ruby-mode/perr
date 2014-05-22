@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: log error
+# key: perr
+# --
+${1:puts} "#{${2:e}.class}: #{$2.message}\n#{$2.backtrace.join($/)}"
