@@ -13,6 +13,7 @@
 (depends-on "flx")
 (depends-on "flx-ido")
 (depends-on "gist")
+(depends-on "haskell-mode")
 (depends-on "ido")
 (depends-on "magit")
 (depends-on "multi-term")
