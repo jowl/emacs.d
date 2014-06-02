@@ -15,6 +15,7 @@
 (depends-on "gist")
 (depends-on "ido")
 (depends-on "magit")
+(depends-on "multi-term")
 (depends-on "multiple-cursors")
 (depends-on "package")
 (depends-on "pallet")
