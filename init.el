@@ -5,6 +5,8 @@
 (require 'use-package)
 (require 'f)
 (require 's)
+(require 'dash)
+(dash-enable-font-lock)
 
 (setq default-directory (f-full (getenv "HOME")))
 (setq inhibit-startup-screen t)
@@ -49,3 +51,12 @@
 (load-local "packages")
 (require 'ace-jump-mode)
 (bind-key "C-c SPC" 'ace-jump-mode)
+
+(defun reset-buffers ()
+  (interactive)
+  (-each
+      (--reject
+       (eq (current-buffer) it)
+       (buffer-list))
+    'kill-buffer)
+  (delete-other-windows))
