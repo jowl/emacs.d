@@ -32,4 +32,5 @@
 (depends-on "swoop")
 (depends-on "use-package")
 (depends-on "web-mode")
+(depends-on "yaml-mode")
 (depends-on "yasnippet")

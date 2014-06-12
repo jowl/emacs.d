@@ -133,3 +133,5 @@
 (use-package multi-term
   :init (setq multi-term-program "/bin/zsh"))
 
+(use-package yaml-mode
+  :mode (("\\.ya?ml$" . yaml-mode)))
