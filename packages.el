@@ -27,7 +27,7 @@
     (setq magit-highlight-indentation nil)
     (setq magit-highlight-trailing-whitespace 1)
     (setq magit-process-popup-time -1)
-    (setq magit-repo-dirs (quote ("~/burtcorp" "~/development")))
+    (setq magit-repo-dirs (quote ("~/burtcorp" "~/development" "~/development/go/src/github.com/jowl")))
     (setq magit-repo-dirs-depth 1)
     (setq magit-set-upstream-on-push 1)
     (setq magit-stage-all-confirm nil)
