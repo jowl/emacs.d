@@ -115,7 +115,9 @@
   :config (progn
             (setq ruby-deep-indent-paren nil)
             (add-hook 'ruby-mode-hook 'rspec-mode)
-            (add-hook 'ruby-mode-hook 'rvm-activate-corresponding-ruby))
+            (add-hook 'ruby-mode-hook 'rvm-activate-corresponding-ruby)
+            (bind-key "C-c , e" '-rspec-verify-single-example rspec-mode-map)
+            (bind-key "C-c , E" '-rspec-verify-example rspec-mode-map))
   :mode (("\\.rake$" . ruby-mode)
          ("\\.gemspec$" . ruby-mode)
          ("\\.ru$" . ruby-mode)

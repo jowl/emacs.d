@@ -67,3 +67,16 @@
   (let ((current-prefix-arg nil)
         (ack-and-a-half-ignore-case (if arg nil 'smart)))
     (call-interactively 'projectile-ack)))
+
+(defun -rspec-verify-single-example (example)
+  "Runs the specified example of the current buffer."
+  (interactive "sExample (current buffer): ")
+  (rspec-run-single-file
+   (rspec-spec-file-for (buffer-file-name))
+   (rspec-core-options)
+   (concat "--example " example)))
+
+(defun -rspec-verify-example (example)
+  "Runs specified example for the project of the current file."
+  (interactive "sExample (current project): ")
+  (rspec-run (concat (rspec-core-options) " --example \"" example "\"")))
