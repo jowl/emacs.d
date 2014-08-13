@@ -56,7 +56,7 @@
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
   :config (progn
-            (setq company-idle-delay 0.1)
+            (setq company-idle-delay 0.3)
             (setq company-show-numbers 1)))
 
 (use-package multiple-cursors
