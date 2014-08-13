@@ -42,7 +42,9 @@
 (use-package projectile
   :init (projectile-global-mode)
   :config (progn
-	    (setq projectile-require-project-root nil)))
+	    (setq projectile-require-project-root nil)
+            (add-hook 'projectile-mode-hook (lambda () (bind-key "C-c p a" 'ack-wrap projectile-mode-map)))))
+
 
 (use-package powerline
   :init (powerline-default-theme)

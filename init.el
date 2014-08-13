@@ -60,3 +60,10 @@
        (buffer-list))
     'kill-buffer)
   (delete-other-windows))
+
+(defun ack-wrap (arg)
+  (interactive "P")
+  (print arg)
+  (let ((current-prefix-arg nil)
+        (ack-and-a-half-ignore-case (if arg nil 'smart)))
+    (call-interactively 'projectile-ack)))
