@@ -44,6 +44,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (bind-key "C-v" (lambda () (interactive) (next-line 10) (recenter)))
 (bind-key "M-v" (lambda () (interactive) (previous-line 10) (recenter)))
+(bind-key "s-<mouse-1>" 'browse-url-at-mouse)
 
 (defun load-local (file)
   (load (f-expand file user-emacs-directory)))
