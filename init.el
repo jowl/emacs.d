@@ -81,3 +81,18 @@
   "Runs specified example for the project of the current file."
   (interactive "sExample (current project): ")
   (rspec-run (concat (rspec-core-options) " --example \"" example "\"")))
+
+(defvar closed-files (list))
+
+(defun track-closed-file ()
+  (and buffer-file-name
+       (message buffer-file-name)
+       (or (delete buffer-file-name closed-files) t)
+       (add-to-list 'closed-files buffer-file-name)))
+
+(defun recently-closed-files ()
+  (interactive)
+  (find-file (ido-completing-read "Recently closed: " closed-files)))
+
+(add-hook 'kill-buffer-hook 'track-closed-file)
+(bind-key "s-T" 'recently-closed-files)
