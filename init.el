@@ -96,3 +96,10 @@
 
 (add-hook 'kill-buffer-hook 'track-closed-file)
 (bind-key "s-T" 'recently-closed-files)
+
+(defadvice sticky-window-keep-window-visible (after sticky-window-mark activate)
+  (let ((mark " ★"))
+    (if (window-dedicated-p (selected-window))
+        (unless (s-ends-with? mark (buffer-name)) (rename-buffer (s-append mark (buffer-name))))
+      (rename-buffer (s-chop-suffix mark (buffer-name))))))
+

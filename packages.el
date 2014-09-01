@@ -140,3 +140,9 @@
 
 (use-package yaml-mode
   :mode (("\\.ya?ml$" . yaml-mode)))
+
+(use-package sticky-windows
+  :bind (
+         ("C-x 0" . sticky-window-delete-window)
+         ("C-x 1" . sticky-window-delete-other-windows)
+         ("C-x 9" . sticky-window-keep-window-visible)))

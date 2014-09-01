@@ -29,6 +29,7 @@
 (depends-on "s")
 (depends-on "smartparens")
 (depends-on "smex")
+(depends-on "sticky-windows")
 (depends-on "swoop")
 (depends-on "use-package")
 (depends-on "web-mode")
