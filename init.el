@@ -75,7 +75,7 @@
   (rspec-run-single-file
    (rspec-spec-file-for (buffer-file-name))
    (rspec-core-options)
-   (concat "--example " example)))
+   (concat " --example \"" example "\"")))
 
 (defun -rspec-verify-example (example)
   "Runs specified example for the project of the current file."
