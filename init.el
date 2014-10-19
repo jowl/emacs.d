@@ -103,3 +103,22 @@
         (unless (s-ends-with? mark (buffer-name)) (rename-buffer (s-append mark (buffer-name))))
       (rename-buffer (s-chop-suffix mark (buffer-name))))))
 
+(defun -enlarge-window-horizontally ()
+  (interactive)
+  (call-interactively 'enlarge-window-horizontally)
+  (-*-window-horizontally-transient-map))
+
+(defun -shrink-window-horizontally ()
+  (interactive)
+  (call-interactively 'shrink-window-horizontally)
+  (-*-window-horizontally-transient-map))
+
+(defun -*-window-horizontally-transient-map ()
+  (set-transient-map
+   (let ((map (make-sparse-keymap)))
+     (define-key map (kbd "}") '-enlarge-window-horizontally)
+     (define-key map (kbd "{") '-shrink-window-horizontally)
+     map)))
+
+(bind-key "C-x }" '-enlarge-window-horizontally)
+(bind-key "C-x {" '-shrink-window-horizontally)
