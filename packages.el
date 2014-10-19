@@ -146,3 +146,7 @@
          ("C-x 0" . sticky-window-delete-window)
          ("C-x 1" . sticky-window-delete-other-windows)
          ("C-x 9" . sticky-window-keep-window-visible)))
+
+(use-package ibuffer-vc
+  :init (ibuffer-vc-set-filter-groups-by-vc-root)
+  :bind ("C-x C-b" . ibuffer))

@@ -15,6 +15,7 @@
 (depends-on "gist")
 (depends-on "go-mode")
 (depends-on "haskell-mode")
+(depends-on "ibuffer-vc")
 (depends-on "ido")
 (depends-on "magit")
 (depends-on "markdown-mode")
