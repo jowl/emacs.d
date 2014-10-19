@@ -122,3 +122,5 @@
 
 (bind-key "C-x }" '-enlarge-window-horizontally)
 (bind-key "C-x {" '-shrink-window-horizontally)
+
+(bind-key "M-g" 'goto-line)
