@@ -50,8 +50,6 @@
   (load (f-expand file user-emacs-directory)))
 
 (load-local "packages")
-(require 'ace-jump-mode)
-(bind-key "C-c SPC" 'ace-jump-mode)
 
 (defun reset-buffers ()
   (interactive)
