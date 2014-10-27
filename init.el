@@ -126,3 +126,8 @@
 (add-hook 'find-file-hook
           (lambda ()
             (linum-mode t)))
+
+(setq frame-title-format '(:eval (frame-title-function)))
+
+(defun frame-title-function ()
+  (list "" "%b" " - " (projectile-project-name) "@" (magit-get-current-branch)))
