@@ -132,5 +132,5 @@
  `(match ((t (:weight bold :foreground ,slick-green-0 :background ,slick-grey-2))))
  '(query-replace ((t (:inherit (isearch)))))
 
- `(default ((t (:family "Source_Code_Pro" :foundry "apple" :height 120 :foreground ,slick-orange+2 :background ,slick-grey-1)))))
+ `(default ((t (:family "Source Code Pro" :foundry "apple" :height 120 :foreground ,slick-orange+2 :background ,slick-grey-1)))))
 
