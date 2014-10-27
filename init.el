@@ -122,3 +122,7 @@
 (bind-key "C-x {" '-shrink-window-horizontally)
 
 (bind-key "M-g" 'goto-line)
+
+(add-hook 'find-file-hook
+          (lambda ()
+            (linum-mode t)))
