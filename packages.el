@@ -63,8 +63,7 @@
   :bind
   (("C->" . mc/mark-next-like-this)
   ("C-<" . mc/mark-previous-like-this)
-  ("C-?" . mc/edit-beginnings-of-lines)
-  ("C-c C-<" . mc/mark-all-like-this)))
+  ("C-?" . mc/mark-all-dwim)))
 
 (use-package yasnippet
   :init (yas-global-mode)
