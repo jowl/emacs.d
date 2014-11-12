@@ -60,8 +60,8 @@
    `(font-lock-builtin-face ((t (:foreground ,slick-green-0))))
    `(font-lock-regexp-grouping-backslash ((t (:weight bold :foreground ,slick-green-0 :inherit (bold)))))
    `(font-lock-function-name-face ((t (:foreground ,slick-green-0))))
-   `(font-lock-comment-face ((t (:foreground ,slick-blue-1))))
-   `(font-lock-comment-delimiter-face ((t (:foreground ,slick-pink-1 :inherit (font-lock-comment-face)))))
+   `(font-lock-comment-face ((t (:foreground ,slick-bw-0))))
+   `(font-lock-comment-delimiter-face ((t (:foreground ,slick-bw-1 :inherit (font-lock-comment-face)))))
    `(font-lock-doc-face ((t (:foreground ,slick-pink-1 :inherit (font-lock-string-face)))))
    `(font-lock-negation-char-face ((t (:foreground ,slick-pink-1))))
    `(font-lock-constant-face ((t (:foreground ,slick-blue+1))))
@@ -83,7 +83,7 @@
    `(mode-line-buffer-id ((t (:weight bold :foreground ,slick-blue-0))))
    '(mode-line-emphasis ((t (:weight bold))))
    `(mode-line-highlight ((t (:box (:line-width 2 :color ,slick-blue-2 :style released-button))) (t (:inherit (highlight)))))
-   `(mode-line-inactive ((t (:weight light :box (:line-width -1 :color nil :style released-button) :foreground ,slick-blue-2 :background ,slick-bw-2 :inherit (mode-line)))))
+   `(mode-line-inactive ((t (:weight light :box (:line-width -1 :color nil :style released-button) :foreground ,slick-bw-1 :background ,slick-bw-2 :inherit (mode-line)))))
 
    `(powerline-active1 ((t (:inherit mode-line :background ,slick-bw-2 :foreground ,slick-green-1))))
    `(powerline-active2 ((t (:inherit mode-line :background ,slick-bw-2 :foreground ,slick-orange-0))))
@@ -102,6 +102,7 @@
    `(company-tooltip-selection ((t (:inherit company-tooltip :background ,slick-pink-2))))
    `(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :foreground ,slick-pink-0))))
 
+   `(linum ((t (:foreground ,slick-bw-1))))
 
    `(isearch ((t (:foreground ,slick-orange-0 :background ,slick-bw-3))))
    `(isearch-fail ((t (:foreground ,slick-orange+2 :background ,slick-pink-0))))
