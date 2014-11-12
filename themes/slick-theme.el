@@ -1,39 +1,42 @@
+(defun with-slick-colors (prog)
+  (let* ((slick-orange-2 "#4D2800")
+         (slick-orange-1 "#80684E")
+         (slick-orange-0 "#FFA139")
+         (slick-orange+1 "#FFD09C")
+         (slick-orange+2 "#FFF6EB")
+
+         (slick-pink-2   "#4D0021")
+         (slick-pink-1   "#804E64")
+         (slick-pink-0   "#FF398F")
+         (slick-pink+1   "#FF9CC7")
+         (slick-pink+2   "#FFEBF4")
+
+         (slick-green-2  "#2C4D00")
+         (slick-green-1  "#6B804E")
+         (slick-green-0  "#ABFF39")
+         (slick-green+1  "#D5FF9C")
+         (slick-green+2  "#F7FFEB")
+
+         (slick-blue-2   "#00354D")
+         (slick-blue-1   "#507180")
+         (slick-blue-0   "#42C6FF")
+         (slick-blue+1   "#A0E2FF")
+         (slick-blue+2   "#ECF9FF")
+
+         (slick-bw-3 "#060606")
+         (slick-bw-2 "#161616")
+         (slick-bw-1 "#565656")
+         (slick-bw-0 "#767676")
+         (slick-bw+1 "#969696")
+         (slick-bw+2 "#e6e6e6")
+         (slick-bw+3 "#f6f6f6"))
+    (eval prog)))
+
 (deftheme slick
   "Created 2013-10-15.")
 
-(let* ((slick-orange-2 "#4D2800")
-       (slick-orange-1 "#80684E")
-       (slick-orange-0 "#FFA139")
-       (slick-orange+1 "#FFD09C")
-       (slick-orange+2 "#FFF6EB")
-
-       (slick-pink-2   "#4D0021")
-       (slick-pink-1   "#804E64")
-       (slick-pink-0   "#FF398F")
-       (slick-pink+1   "#FF9CC7")
-       (slick-pink+2   "#FFEBF4")
-
-       (slick-green-2  "#2C4D00")
-       (slick-green-1  "#6B804E")
-       (slick-green-0  "#ABFF39")
-       (slick-green+1  "#D5FF9C")
-       (slick-green+2  "#F7FFEB")
-
-       (slick-blue-2   "#00354D")
-       (slick-blue-1   "#507180")
-       (slick-blue-0   "#42C6FF")
-       (slick-blue+1   "#A0E2FF")
-       (slick-blue+2   "#ECF9FF")
-
-       (slick-bw-3 "#060606")
-       (slick-bw-2 "#161616")
-       (slick-bw-1 "#565656")
-       (slick-bw-0 "#767676")
-       (slick-bw+1 "#969696")
-       (slick-bw+2 "#e6e6e6")
-       (slick-bw+3 "#f6f6f6"))
-
-  (custom-theme-set-faces
+(with-slick-colors
+  '(custom-theme-set-faces
    'slick
 
    `(magit-branch ((t (:inherit magit-header :foreground ,slick-blue-0 :weight bold))))
