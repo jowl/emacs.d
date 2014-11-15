@@ -108,7 +108,7 @@
     `(company-preview ((t (:foreground ,slick-orange+1 :background ,slick-blue-2))))
     `(company-preview-common ((t (:inherit company-preview :foreground ,slick-pink-0))))
     `(company-preview-search ((t (:inherit company-preview :background ,slick-blue-1))))
-    `(company-tooltip ((t (:foreground ,slick-green-1 :background ,slick-bw-3))))
+    `(company-tooltip ((t (:background ,slick-bw-3))))
     `(company-scrollbar-bg ((t (:inherit company-tooltip :background ,slick-bw-1))))
     `(company-scrollbar-fg ((t (:inherit company-tooltip :background ,slick-pink-1))))
     `(company-tooltip-annotation ((t (:inherit company-tooltip :foreground ,slick-orange+1))))
