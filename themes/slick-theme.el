@@ -63,7 +63,7 @@
     `(link-visited ((t (:weight normal :underline (:color foreground-color :style line) :foreground ,slick-blue-1 :inherit (link)))))
     `(fringe ((t (:foreground ,slick-bw-0 :background ,slick-bw-2))))
     `(tooltip ((((class color)) (:inherit (variable-pitch) :foreground ,slick-bw-3 :background "lightyellow")) (t (:inherit (variable-pitch)))))
-    `(linum ((t (:foreground ,slick-bw-1))))
+    `(linum ((t (:foreground ,slick-bw-1 :height 120))))
     `(success ((t (:foreground ,slick-success))))
     `(warning ((t (:foreground ,slick-warning))))
     `(error ((t (:foreground ,slick-error))))
