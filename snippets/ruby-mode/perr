@@ -2,4 +2,4 @@
 # name: log error
 # key: perr
 # --
-${1:puts} "#{${2:e}.class}: #{$2.message}\n#{$2.backtrace.join($/)}"
+${1:puts} "$2: #{${3:e}.message} (#{$3.class})\n#{$3.backtrace.join($/)}"
