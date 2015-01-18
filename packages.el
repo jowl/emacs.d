@@ -97,14 +97,14 @@
     (use-package rspec-mode
                  :config
                  (progn
-                   (setq rspec-use-rvm 1)
-                   (setq rspec-use-rake-flag nil)
-                   (setq rspec-spec-command "JRUBY_OPTS=\"--1.9 --debug\" rspec")
+                   (defadvice rspec-compile (around rspec-compile-around)
+                     (let ((shell-command-switch "-lc"))
+                       ad-do-it))
+                   (ad-activate 'rspec-compile)
                    (setq rspec-use-bundler-when-possible nil)
-		   (defadvice rspec-compile (around rspec-compile-around activate)
-		     "Use BASH shell for running the specs because of ZSH issues."
-		     (let ((shell-file-name "/bin/bash"))
-		       ad-do-it))
+                   (setq rspec-use-zeus-when-possible nil)
+                   (setq rspec-use-rake-when-possible nil)
+                   (setq rspec-use-spring-when-possible nil)
                    (add-hook 'compilation-mode-hook
                              (lambda ()
                                (when (eq major-mode 'rspec-compilation-mode)
