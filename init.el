@@ -73,12 +73,12 @@
   (rspec-run-single-file
    (rspec-spec-file-for (buffer-file-name))
    (rspec-core-options)
-   (concat " --example \"" example "\"")))
+   (concat " --example " (shell-quote-argument example))))
 
 (defun -rspec-verify-example (example)
   "Runs specified example for the project of the current file."
   (interactive "sExample (current project): ")
-  (rspec-run (concat (rspec-core-options) " --example \"" example "\"")))
+  (rspec-run (concat (rspec-core-options) " --example " (shell-quote-argument example))))
 
 (defvar closed-files (list))
 

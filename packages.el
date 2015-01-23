@@ -97,10 +97,15 @@
     (use-package rspec-mode
                  :config
                  (progn
-                   (defadvice rspec-compile (around rspec-compile-around)
-                     (let ((shell-command-switch "-lc"))
-                       ad-do-it))
-                   (ad-activate 'rspec-compile)
+                   (defun -rspec-compile (orig target &optional opts)
+                     (interactive "P")
+                     (let ((opts (if current-prefix-arg
+                                     (cons "--fail-fast" opts)
+                                   opts))
+                           (shell-command-switch "-lc"))
+                       (apply orig (list target opts))))
+                   (advice-add 'rspec-compile :around '-rspec-compile)
+                   (setq rspec-spec-command "ng-rspec")
                    (setq rspec-use-bundler-when-possible nil)
                    (setq rspec-use-zeus-when-possible nil)
                    (setq rspec-use-rake-when-possible nil)
