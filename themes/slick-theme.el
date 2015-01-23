@@ -118,7 +118,7 @@
 
     ;; search
     `(isearch ((t (:foreground ,slick-orange-0 :background ,slick-bw-3))))
-    `(isearch-fail ((t (:foreground ,slick-orange+2 :background ,slick-pink-0))))
+    `(isearch-fail ((t (:foreground ,slick-orange+2 :background ,slick-pink-1))))
     `(lazy-highlight ((t (:foreground ,slick-orange+1 :background ,slick-bw-3))))
     `(match ((t (:weight bold :foreground ,slick-green-0 :background ,slick-bw-3))))
     '(query-replace ((t (:inherit (isearch)))))
