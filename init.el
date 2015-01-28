@@ -134,3 +134,15 @@
     (if (projectile-project-p)
         (list title " - " (magit-get-current-branch))
       title)))
+
+(defun -open-next-line ()
+  (interactive)
+  (end-of-line)
+  (align-newline-and-indent))
+
+(defun -open-line ()
+  (interactive)
+  (save-excursion (align-newline-and-indent)))
+
+(bind-key "C-o" '-open-line)
+(bind-key "M-o" '-open-next-line)
