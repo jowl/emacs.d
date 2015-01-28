@@ -73,14 +73,25 @@
   :init
   (progn
     (use-package smartparens-config)
-    (smartparens-global-mode 1)
+    (smartparens-global-mode t)
     (setq sp-autoescape-string-quote nil)
     (show-smartparens-global-mode t))
   :bind
-  (("C-)" . sp-forward-slurp-sexp)
-   ("C-}" . sp-forward-barf-sexp)
-   ("C-(" . sp-backward-slurp-sexp)
-   ("C-{" . sp-backward-barf-sexp)))
+  (("C-M-k" . sp-kill-sexp)
+   ("C-M-w" . sp-copy-sexp)
+   ("C-)"   . sp-forward-slurp-sexp)
+   ("C-("   . sp-backward-slurp-sexp)
+   ("C-}"   . sp-forward-barf-sexp)
+   ("C-{"   . sp-backward-barf-sexp)
+   ;; navigation
+   ("C-M-a" . sp-beginning-of-sexp)
+   ("C-M-e" . sp-end-of-sexp)
+   ("C-M-n" . sp-next-sexp)
+   ("C-M-p" . sp-previous-sexp)
+   ("M-f"   . sp-forward-symbol)
+   ("M-b"   . sp-backward-symbol)
+   ("C-M-f" . sp-forward-sexp)
+   ("C-M-b" . sp-backward-sexp)))
 
 (use-package discover)
 
