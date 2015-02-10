@@ -160,5 +160,6 @@
                (add-hook 'haskell-mode-hook 'interactive-haskell-mode)))
 
 (use-package smart-mode-line
-  :init (sml/setup)
-  :config (sml/apply-theme 'automatic))
+  :init (progn
+          (custom-set-variables '(custom-safe-themes '("6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" default)))
+          (sml/setup)))
