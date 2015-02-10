@@ -45,8 +45,6 @@
     'slick
 
     ;; general
-    `(show-paren-match-face ((t (:foreground ,slick-pink+2 :background ,slick-green-1))))
-    `(show-paren-mismatch-face ((t (:foreground ,slick-green+2 :background ,slick-pink-1))))
     `(header-line ((t (:box nil :foreground ,slick-orange+1 :background ,slick-bw-3 :inherit (mode-line)))))
     `(escape-glyph ((t (:weight bold :foreground ,slick-pink-1))))
     `(region ((t (:inverse-video nil :background ,slick-blue-2))))
@@ -91,10 +89,6 @@
     '(mode-line-emphasis ((t (:weight bold))))
     `(mode-line-highlight ((t (:box (:line-width 2 :color ,slick-blue-2 :style released-button))) (t (:inherit (highlight)))))
     `(mode-line-inactive ((t (:weight light :box (:line-width -1 :color nil :style released-button) :foreground ,slick-bw-1 :background ,slick-bw-2 :inherit (mode-line)))))
-    `(powerline-active1 ((t (:inherit mode-line :background ,slick-bw-2 :foreground ,slick-green-1))))
-    `(powerline-active2 ((t (:inherit mode-line :background ,slick-bw-2 :foreground ,slick-orange-0))))
-    `(powerline-inactive1 ((t (:inherit mode-line :background ,slick-bw-2 :foreground ,slick-bw-1))))
-    `(powerline-inactive2 ((t (:inherit mode-line :background ,slick-bw-2 :foreground ,slick-bw-1))))
 
     ;; magit
     `(magit-branch ((t (:inherit magit-header :foreground ,slick-blue-0 :weight bold))))
@@ -121,7 +115,11 @@
     `(isearch-fail ((t (:foreground ,slick-orange+2 :background ,slick-pink-1))))
     `(lazy-highlight ((t (:foreground ,slick-orange+1 :background ,slick-bw-3))))
     `(match ((t (:weight bold :foreground ,slick-green-0 :background ,slick-bw-3))))
-    '(query-replace ((t (:inherit (isearch)))))
+    '(query-replace ((t (:inherit ( isearch)))))
+
+    ;;smart-parens
+    `(sp-show-pair-match-face ((t (:background ,slick-blue-2))))
+    `(sp-show-pair-mismatch-face ((t (:background ,slick-pink-1))))
 
     ;; default
     `(default ((t (:family "Source Code Pro" :foundry "apple" :height 120 :foreground ,slick-bw+2 :background ,slick-bw-2)))))))

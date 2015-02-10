@@ -23,7 +23,6 @@
 (depends-on "multiple-cursors")
 (depends-on "package")
 (depends-on "pallet")
-(depends-on "powerline")
 (depends-on "prodigy")
 (depends-on "projectile")
 (depends-on "rspec-mode")

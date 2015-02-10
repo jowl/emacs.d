@@ -45,14 +45,6 @@
   :config (progn
             (add-hook 'projectile-mode-hook (lambda () (bind-key "C-c p a" 'ack-wrap projectile-mode-map)))))
 
-
-(use-package powerline
-  :init (powerline-default-theme)
-  :config
-  (progn
-    (setq powerline-default-separator nil)
-    (setq powerline-default-separator-dir (quote (left . right)))))
-
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
   :config (progn
@@ -166,3 +158,7 @@
 (use-package haskell-mode
   :init (progn (add-hook 'haskell-mode-hook 'haskell-indent-mode)
                (add-hook 'haskell-mode-hook 'interactive-haskell-mode)))
+
+(use-package smart-mode-line
+  :init (sml/setup)
+  :config (sml/apply-theme 'automatic))
