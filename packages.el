@@ -163,3 +163,6 @@
   :init (progn
           (custom-set-variables '(custom-safe-themes '("6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" default)))
           (sml/setup)))
+
+(use-package misc
+  :bind ("M-z" . zap-up-to-char))
