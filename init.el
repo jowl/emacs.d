@@ -34,6 +34,7 @@
 (load-theme 'slick t)
 (windmove-default-keybindings 'super)
 (show-paren-mode t)
+(scroll-bar-mode -1)
 (bind-key "C-x C-c" (lambda ()
 		      (interactive)
 		      (when (y-or-n-p "Quit Emacs?")
