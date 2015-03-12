@@ -33,6 +33,7 @@
 (add-to-list 'custom-theme-load-path (f-expand "themes" user-emacs-directory))
 (load-theme 'slick t)
 (windmove-default-keybindings 'super)
+(column-number-mode t)
 (scroll-bar-mode -1)
 (bind-key "C-x C-c" (lambda ()
 		      (interactive)
