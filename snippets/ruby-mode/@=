@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: instance-assignment
+# key: @=
+# --
+@$1 = $1
