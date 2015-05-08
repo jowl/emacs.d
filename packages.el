@@ -174,6 +174,11 @@
   :mode ("\\.js$" . js2-mode)
   :config (setq js2-basic-offset 2))
 
+(use-package sh-script
+  :config (progn
+            (setq sh-basic-offset 2)
+            (setq sh-indentation 2)))
+
 (use-package coffee-mode
   :config
   (progn
