@@ -48,6 +48,8 @@
 (bind-key "C-v" (lambda () (interactive) (next-line 10) (recenter)))
 (bind-key "M-v" (lambda () (interactive) (previous-line 10) (recenter)))
 (bind-key "s-<mouse-1>" 'browse-url-at-mouse)
+(bind-key "s-}" 'other-window)
+(bind-key "s-{" (lambda () (interactive) (other-window -1)))
 
 (defun load-local (file)
   (load (f-expand file user-emacs-directory)))
