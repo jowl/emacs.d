@@ -31,6 +31,7 @@
 (bind-key "C-c h" 'query-replace-regexp)
 (bind-key "C-c a" 'align-regexp)
 (setq require-final-newline nil)
+(setq mode-require-final-newline nil)
 (add-to-list 'custom-theme-load-path (f-expand "themes" user-emacs-directory))
 (load-theme 'slick t)
 (windmove-default-keybindings 'super)
