@@ -54,8 +54,9 @@
 (use-package multiple-cursors
   :bind
   (("C->" . mc/mark-next-like-this)
-  ("C-<" . mc/mark-previous-like-this)
-  ("C-?" . mc/mark-all-dwim)))
+   ("C-<" . mc/mark-previous-like-this)
+   ("C-?" . mc/mark-all-dwim)
+   ("M-/" . mc/edit-lines)))
 
 (use-package yasnippet
   :init (yas-global-mode)
