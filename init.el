@@ -22,6 +22,7 @@
 (setq mac-command-key-is-meta nil)
 (setq mac-command-modifier 'super)
 (setq mac-option-modifier 'meta)
+(unbind-key "s-q")
 (menu-bar-mode 1)
 (setq browse-url-browser-function 'browse-url-default-macosx-browser)
 (setq delete-by-moving-to-trash t)
