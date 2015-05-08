@@ -169,3 +169,16 @@
 
 (use-package rainbow-mode
   :config  (setq rainbow-x-colors nil))
+
+(use-package js2-mode
+  :mode ("\\.js$" . js2-mode)
+  :config (setq js2-basic-offset 2))
+
+(use-package coffee-mode
+  :config
+  (progn
+    (add-hook 'coffee-mode-hook
+              (lambda ()
+                (bind-key "C-j" 'coffee-newline-and-indent coffee-mode-map)
+                (bind-key "C-M-h" 'backward-kill-word coffee-mode-map)
+                (setq coffee-tab-width 2)))))
