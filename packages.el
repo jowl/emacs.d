@@ -166,3 +166,6 @@
 
 (use-package misc
   :bind ("M-z" . zap-up-to-char))
+
+(use-package rainbow-mode
+  :config  (setq rainbow-x-colors nil))
