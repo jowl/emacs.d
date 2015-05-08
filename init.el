@@ -155,3 +155,30 @@
 (defun copy-buffer-file-name ()
   (interactive)
   (kill-new buffer-file-name))
+
+(defun agency-lib-test-toggle ()
+  (interactive)
+  (when (buffer-file-name)
+    (let ((lib-matches
+           (s-match
+            "agency\\/lib\/\\(.+\\)\\/\\(.+\\)\\.coffee$"
+            (buffer-file-name)))
+          (spec-matches
+           (s-match
+            "agency\\/test\\/unit\/\\(.+\\)\\/\\(.+\\)\\.spec\\.coffee$"
+            (buffer-file-name))))
+      (cond (lib-matches
+             (find-file
+              (format
+               "~/burtcorp/agency/test/unit/%s/%s.spec.coffee"
+               (nth 1 lib-matches)
+               (nth 2 lib-matches))))
+            (spec-matches
+             (find-file
+              (format
+               "~/burtcorp/agency/lib/%s/%s.coffee"
+               (nth 1 spec-matches)
+               (nth 2 spec-matches))))
+            (:else (call-interactively 'projectile-toggle-between-implementation-and-test))))))
+
+(bind-key "C-c p t" 'agency-lib-test-toggle projectile-mode-map)
