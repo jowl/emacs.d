@@ -151,3 +151,7 @@
 
 (bind-key "C-o" '-open-line)
 (bind-key "M-o" '-open-next-line)
+
+(defun copy-buffer-file-name ()
+  (interactive)
+  (kill-new buffer-file-name))
