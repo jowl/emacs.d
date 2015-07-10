@@ -1,6 +1,7 @@
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
 (require 'pallet)
+(pallet-mode t)
 
 (require 'use-package)
 (require 'f)
@@ -64,13 +65,6 @@
        (buffer-list))
     'kill-buffer)
   (delete-other-windows))
-
-(defun ack-wrap (arg)
-  (interactive "P")
-  (print arg)
-  (let ((current-prefix-arg nil)
-        (ack-and-a-half-ignore-case (if arg nil 'smart)))
-    (call-interactively 'projectile-ack)))
 
 (defun -rspec-verify-single-example (example)
   "Runs the specified example of the current buffer."

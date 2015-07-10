@@ -13,8 +13,6 @@
   :init (flx-ido-mode 1)
   :config (setq ido-use-faces nil))
 
-(use-package ack-and-a-half)
-
 (use-package magit
   :init (progn
           (use-package magit-blame)
@@ -27,8 +25,8 @@
     (setq magit-highlight-indentation nil)
     (setq magit-highlight-trailing-whitespace 1)
     (setq magit-process-popup-time -1)
-    (setq magit-repo-dirs (quote ("~/burtcorp" "~/development" "~/development/go/src/github.com/jowl")))
-    (setq magit-repo-dirs-depth 1)
+    (setq magit-repository-directories (quote ("~/burtcorp" "~/development" "~/development/go/src/github.com/jowl")))
+    (setq magit-repository-directiries-depth 1)
     (setq magit-set-upstream-on-push t)
     (setq magit-stage-all-confirm nil)
     (setq magit-unstage-all-confirm nil)
@@ -38,12 +36,10 @@
     (add-hook 'magit-mode-hook (lambda () (if (f-file? (f-expand "Gemfile" default-directory)) (rspec-mode)))))
   :bind
   (("C-c g" . magit-status)
-   ("C-c b" . magit-blame-mode)))
+   ("C-c b" . magit-blame)))
 
 (use-package projectile
-  :init (projectile-global-mode)
-  :config (progn
-            (add-hook 'projectile-mode-hook (lambda () (bind-key "C-c p a" 'ack-wrap projectile-mode-map)))))
+  :init (projectile-global-mode))
 
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
@@ -146,12 +142,6 @@
 (use-package yaml-mode
   :mode (("\\.ya?ml$" . yaml-mode)))
 
-(use-package sticky-windows
-  :bind (
-         ("C-x 0" . sticky-window-delete-window)
-         ("C-x 1" . sticky-window-delete-other-windows)
-         ("C-x 9" . sticky-window-keep-window-visible)))
-
 (use-package ibuffer-vc
   :init (ibuffer-vc-set-filter-groups-by-vc-root)
   :bind ("C-x C-b" . ibuffer))
@@ -162,7 +152,7 @@
 
 (use-package smart-mode-line
   :init (progn
-          (custom-set-variables '(custom-safe-themes '("6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" default)))
+          (custom-set-variables '(custom-safe-themes '("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
           (sml/setup)))
 
 (use-package misc
@@ -173,7 +163,11 @@
 
 (use-package js2-mode
   :mode ("\\.js$" . js2-mode)
-  :config (setq js2-basic-offset 2))
+  :config (setq-default js2-basic-offset 2))
+
+(use-package js-mode
+  :config (progn
+            (setq js-indent-level 2)))
 
 (use-package sh-script
   :config (progn
@@ -188,3 +182,7 @@
                 (bind-key "C-j" 'coffee-newline-and-indent coffee-mode-map)
                 (bind-key "C-M-h" 'backward-kill-word coffee-mode-map)
                 (setq coffee-tab-width 2)))))
+
+(use-package css-mode
+  :mode (("\\.s?css$" . css-mode))
+  :config (setq css-indent-offset 2))
