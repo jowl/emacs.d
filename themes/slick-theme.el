@@ -96,7 +96,7 @@
     `(magit-diff-add ((t (:inherit diff-added :foreground ,slick-green-0 :background ,slick-bw-2))))
     `(magit-item-highlight ((t (:background ,slick-blue-1 :inherit nil))))
     `(magit-log-sha1 ((t (:foreground ,slick-green-1))))
-    `(magit-section-heading ((t (:foreground ,slick-orange+1)))))
+    `(magit-section-heading ((t (:foreground ,slick-orange+1))))
 
     ;; company
     `(company-echo-common ((t (:foreground ,slick-pink-0))))
