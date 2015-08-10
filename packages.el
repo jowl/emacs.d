@@ -88,8 +88,8 @@
 
 (use-package web-mode)
 
-(use-package rvm
-  :init (rvm-use-default))
+(use-package rbenv
+  :init (global-rbenv-mode))
 
 (use-package ruby-mode
   :init
@@ -105,7 +105,7 @@
                            (shell-command-switch "-lc"))
                        (apply orig (list target opts))))
                    (advice-add 'rspec-compile :around '-rspec-compile)
-                   (setq rspec-spec-command "ng-rspec")
+                   (setq rspec-spec-command "rbenv exec rspec")
                    (setq rspec-use-bundler-when-possible nil)
                    (setq rspec-use-zeus-when-possible nil)
                    (setq rspec-use-rake-when-possible nil)
@@ -119,7 +119,6 @@
   :config (progn
             (setq ruby-deep-indent-paren nil)
             (add-hook 'ruby-mode-hook 'rspec-mode)
-            (add-hook 'ruby-mode-hook 'rvm-activate-corresponding-ruby)
             (bind-key "C-c , e" '-rspec-verify-single-example rspec-mode-map)
             (bind-key "C-c , E" '-rspec-verify-example rspec-mode-map)
             (setq ruby-align-to-stmt-keywords '(begin if while unless until case for)))

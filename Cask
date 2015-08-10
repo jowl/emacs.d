@@ -30,6 +30,7 @@
 (depends-on "prodigy")
 (depends-on "projectile")
 (depends-on "rainbow-mode")
+(depends-on "rbenv")
 (depends-on "rspec-mode")
 (depends-on "ruby-mode")
 (depends-on "rvm")
