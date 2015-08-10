@@ -185,3 +185,6 @@
 (use-package css-mode
   :mode (("\\.s?css$" . css-mode))
   :config (setq css-indent-offset 2))
+
+(use-package java-mode
+  :config (c-basic-offset 2))

@@ -192,3 +192,15 @@
 		 (with-selected-window window
 		   (split-window-below))))))))
 (setq split-window-preferred-function 'split-window-sensibly-but-prefer-horizontally)
+
+;; doesn't work!
+(defun rubify-fqcn (beg end)
+  (interactive "r")
+  (save-excursion
+    (capitalize-region beg end)
+    (goto-char end)
+    (re-search-backward "." beg)
+    (replace-match "::")
+    (replace-string "." "" nil beg end)
+    (goto-char beg)
+    (insert "Java::")))
