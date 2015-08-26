@@ -37,6 +37,7 @@
 (depends-on "rvm")
 (depends-on "s")
 (depends-on "scala-mode2")
+(depends-on "smart-mode-line")
 (depends-on "smartparens")
 (depends-on "smex")
 (depends-on "swoop")
