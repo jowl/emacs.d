@@ -114,6 +114,7 @@
                    (add-hook 'compilation-mode-hook
                              (lambda ()
                                (when (eq major-mode 'rspec-compilation-mode)
+                                 (setq compilation-scroll-output t)
                                  (local-set-key (kbd "g") (lambda ()
                                                             (interactive)
                                                             (rspec-rerun)))))))))
