@@ -89,9 +89,6 @@
 
 (use-package web-mode)
 
-(use-package rbenv
-  :init (global-rbenv-mode))
-
 (use-package ruby-mode
   :init
   (progn
