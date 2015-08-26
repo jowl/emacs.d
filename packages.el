@@ -33,6 +33,7 @@
     (setq magit-restore-window-configuration t)
     (setq magit-status-buffer-switch-function (quote switch-to-buffer))
     (setq magit-diff-options (quote ("--histogram")))
+    (setq magit-branch-arguments nil)
     (add-hook 'magit-mode-hook (lambda () (if (f-file? (f-expand "Gemfile" default-directory)) (rspec-mode)))))
   :bind
   (("C-c g" . magit-status)
