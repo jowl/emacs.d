@@ -193,14 +193,15 @@
 		   (split-window-below))))))))
 (setq split-window-preferred-function 'split-window-sensibly-but-prefer-horizontally)
 
-;; doesn't work!
 (defun rubify-fqcn (beg end)
   (interactive "r")
-  (save-excursion
-    (capitalize-region beg end)
-    (goto-char end)
-    (re-search-backward "." beg)
-    (replace-match "::")
-    (replace-string "." "" nil beg end)
-    (goto-char beg)
-    (insert "Java::")))
+  (let ((case-fold-search nil))
+    (save-excursion
+      (goto-char beg)
+      (re-search-forward "[A-Z]" end)
+      (search-backward "." beg)
+      (capitalize-region beg (point))
+      (replace-string "." "::" nil (point) end)
+      (replace-string "." "" nil beg end)
+      (goto-char beg)
+      (insert "Java::"))))
