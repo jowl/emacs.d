@@ -21,6 +21,7 @@
 (depends-on "ido")
 (depends-on "ido-completing-read+")
 (depends-on "jq-mode")
+(depends-on "js2-mode")
 (depends-on "kurecolor")
 (depends-on "magit")
 (depends-on "markdown-mode")
