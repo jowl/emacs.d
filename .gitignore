@@ -8,3 +8,5 @@ projectile.cache
 tramp
 var
 /tmp
+/ido.last
+/smex-items
