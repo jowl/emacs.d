@@ -32,9 +32,11 @@
     (setq magit-unstage-all-confirm nil)
     (setq magit-restore-window-configuration t)
     (setq magit-status-buffer-switch-function (quote switch-to-buffer))
-    (setq magit-diff-options (quote ("--histogram")))
+    (setq magit-diff-options '("--histogram"))
+    (setq magit-log-arguments '("--graph" "--color" "--decorate"))
     (setq magit-branch-arguments nil)
     (setq magit-push-always-verify nil)
+    (setq magit-revert-buffers t)
     (add-hook 'magit-mode-hook (lambda () (if (f-file? (f-expand "Gemfile" default-directory)) (rspec-mode)))))
   :bind
   (("C-c g" . magit-status)
@@ -60,13 +62,16 @@
   :init (yas-global-mode)
   :config (setq yas-snippet-dirs (list (f-expand "snippets" user-emacs-directory))))
 
-(use-package smartparens
+(use-package smartparens-config
   :init
   (progn
-    (use-package smartparens-config)
-    (smartparens-global-mode t)
-    (setq sp-autoescape-string-quote nil)
-    (show-smartparens-global-mode t))
+    (use-package smartparens-html)
+    (use-package smartparens-ruby)
+    (use-package smartparens-scala)
+    (use-package smartparens-latex)
+    (use-package smartparens-haskell)
+    (smartparens-global-mode 1)
+    (show-smartparens-global-mode 1))
   :bind
   (("C-M-k" . sp-kill-sexp)
    ("C-M-w" . sp-copy-sexp)
@@ -84,11 +89,10 @@
    ("C-M-f" . sp-forward-sexp)
    ("C-M-b" . sp-backward-sexp)))
 
+(use-package html-mode)
 (use-package discover)
 
 (use-package prodigy)
-
-(use-package web-mode)
 
 (use-package ruby-mode
   :init
@@ -104,7 +108,7 @@
                            (shell-command-switch "-lc"))
                        (apply orig (list target opts))))
                    (advice-add 'rspec-compile :around '-rspec-compile)
-                   (setq rspec-spec-command "rbenv exec rspec")
+                   (setq rspec-spec-command "rbenv exec bundle exec rspec")
                    (setq rspec-use-bundler-when-possible nil)
                    (setq rspec-use-zeus-when-possible nil)
                    (setq rspec-use-rake-when-possible nil)
@@ -165,8 +169,7 @@
   :config (setq-default js2-basic-offset 2))
 
 (use-package js-mode
-  :config (progn
-            (setq js-indent-level 2)))
+  :config (setq js-indent-level 2))
 
 (use-package sh-script
   :config (progn
@@ -188,3 +191,16 @@
 
 (use-package java-mode
   :config (c-basic-offset 2))
+
+(use-package web-mode
+  :config (progn
+            (setq web-mode-enable-auto-pairing nil)
+            (setq web-mode-enable-css-colorization t)
+            (setq web-mode-markup-indent-offset 2)
+            (setq web-mode-css-indent-offset 2)
+            (setq web-mode-code-indent-offset 2)
+            (defun sp-web-mode-is-code-context (id action context)
+              (and (eq action 'insert)
+                   (not (or (get-text-property (point) 'part-side)
+                            (get-text-property (point) 'block-side)))))
+            (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))))
