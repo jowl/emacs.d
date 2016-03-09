@@ -84,8 +84,6 @@
    ("C-M-e" . sp-end-of-sexp)
    ("C-M-n" . sp-next-sexp)
    ("C-M-p" . sp-previous-sexp)
-   ("M-f"   . sp-forward-symbol)
-   ("M-b"   . sp-backward-symbol)
    ("C-M-f" . sp-forward-sexp)
    ("C-M-b" . sp-backward-sexp)))
 
