@@ -90,7 +90,9 @@
 (use-package html-mode)
 (use-package discover)
 
-(use-package prodigy)
+(use-package prodigy
+  :init (load-local "prodigy-services")
+  :bind (("C-x p" . prodigy)))
 
 (use-package ruby-mode
   :init
