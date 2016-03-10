@@ -9,6 +9,10 @@
 (require 'dash)
 (dash-enable-font-lock)
 
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
 (setq default-directory (f-full (getenv "HOME")))
 (setq inhibit-startup-screen t)
 (setq-default indent-tabs-mode nil)
