@@ -126,9 +126,10 @@
                  :bind (("C-c , g" . -rspec-compilation-buffer))))
   :config (progn
             (setq ruby-deep-indent-paren nil)
-            (add-hook 'ruby-mode-hook 'rspec-mode)
-            (bind-key "C-c , e" '-rspec-verify-single-example rspec-mode-map)
-            (bind-key "C-c , E" '-rspec-verify-example rspec-mode-map)
+            (add-hook 'dired-mode-hook 'rspec-dired-mode)
+            (add-hook 'ruby-mode-hook (lambda ()
+                                        (bind-key ", e" '-rspec-verify-single-example rspec-verifiable-mode-keymap)
+                                        (bind-key ", E" '-rspec-verify-example rspec-verifiable-mode-keymap)))
             (setq ruby-align-to-stmt-keywords '(begin if while unless until case for)))
   :mode (("\\.rake$" . ruby-mode)
          ("\\.gemspec$" . ruby-mode)
@@ -192,9 +193,6 @@
 (use-package css-mode
   :mode (("\\.s?css$" . css-mode))
   :config (setq css-indent-offset 2))
-
-(use-package java-mode
-  :config (c-basic-offset 2))
 
 (use-package web-mode
   :config (progn

@@ -14,6 +14,7 @@
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 (setq standard-indent 2)
+(setq c-basic-offset 2)
 (tool-bar-mode -1)
 (setq make-backup-files nil)
 (setq backup-directory-alist
