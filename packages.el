@@ -33,7 +33,7 @@
     (setq magit-restore-window-configuration t)
     (setq magit-status-buffer-switch-function (quote switch-to-buffer))
     (setq magit-diff-options '("--histogram"))
-    (setq magit-log-arguments '("--graph" "--color" "--decorate"))
+    (setq magit-log-arguments '("-n256" "--graph" "--color" "--decorate"))
     (setq magit-branch-arguments nil)
     (setq magit-push-always-verify nil)
     (setq magit-revert-buffers t)
