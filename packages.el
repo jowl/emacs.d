@@ -1,7 +1,13 @@
 (use-package exec-path-from-shell
   :init (exec-path-from-shell-initialize))
 
-(use-package ansi-color)
+(use-package ansi-color
+  :config (progn
+            (defun -colorize-compilation-buffer ()
+              (toggle-read-only)
+              (ansi-color-apply-on-region compilation-filter-start (point))
+              (toggle-read-only))
+            (add-hook 'compilation-filter-hook '-colorize-compilation-buffer)))
 
 (use-package ido
   :init (ido-mode 1)
