@@ -1,40 +1,4 @@
-(defun with-slick-colors (f)
-  (let* ((slick-orange-2 "#804300")
-         (slick-orange-1 "#D87000")
-         (slick-orange-0 "#FF931E")
-         (slick-orange+1 "#FFBB70")
-         (slick-orange+2 "#FF8500")
-
-         (slick-pink-2 "#6B0033")
-         (slick-pink-1 "#B40055")
-         (slick-pink-0 "#F21D82")
-         (slick-pink+1 "#F46BAC")
-         (slick-pink+2 "#F00071")
-
-         (slick-green-2 "#487600")
-         (slick-green-1 "#78C700")
-         (slick-green-0 "#A2F91E")
-         (slick-green+1 "#C3FA6E")
-         (slick-green+2 "#96F800")
-
-         (slick-blue-2 "#013B51")
-         (slick-blue-1 "#026387")
-         (slick-blue-0 "#23ADE2")
-         (slick-blue+1 "#6AC3E5")
-         (slick-blue+2 "#03A1DD")
-
-         (slick-success "#68D600")
-         (slick-warning "#EEBD00")
-         (slick-error "#EE1700")
-
-         (slick-bw-3 "#060606")
-         (slick-bw-2 "#161616")
-         (slick-bw-1 "#565656")
-         (slick-bw-0 "#767676")
-         (slick-bw+1 "#969696")
-         (slick-bw+2 "#e6e6e6")
-         (slick-bw+3 "#f6f6f6"))
-    (funcall f)))
+(require 'slick-colors)
 
 (deftheme slick
   "Created 2013-10-15.")

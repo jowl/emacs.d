@@ -40,8 +40,6 @@
 (bind-key "C-c a" 'align-regexp)
 (setq require-final-newline 'visit)
 (setq mode-require-final-newline nil)
-(add-to-list 'custom-theme-load-path (f-expand "themes" user-emacs-directory))
-(load-theme 'slick t)
 (windmove-default-keybindings 'super)
 (column-number-mode t)
 (scroll-bar-mode -1)
@@ -64,6 +62,18 @@
   (load (f-expand file user-emacs-directory)))
 
 (load-local "packages")
+
+(let ((themes-path (f-expand "themes" user-emacs-directory)))
+  (add-to-list 'load-path themes-path)
+  (add-to-list 'custom-theme-load-path themes-path))
+(defun toggle-slick-theme ()
+  (interactive)
+  (let ((slick-next-theme (if (and (boundp 'slick-current-theme) (eq slick-current-theme 'slick)) 'slick-light 'slick)))
+    (let ((sml-next-theme (if (eq slick-next-theme 'slick) 'automatic 'respectful)))
+      (setq slick-current-theme slick-next-theme)
+      (load-theme slick-next-theme t)
+      (sml/apply-theme sml-next-theme))))
+(toggle-slick-theme)
 
 (defun reset-buffers ()
   (interactive)
@@ -213,3 +223,4 @@
       (replace-string "." "" nil beg end)
       (goto-char beg)
       (insert "Java::"))))
+
