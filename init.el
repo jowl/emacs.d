@@ -195,22 +195,6 @@
 
 (bind-key "C-c p t" 'agency-lib-test-toggle projectile-mode-map)
 
-(defun split-window-sensibly-but-prefer-horizontally (&optional window)
-  (let ((window (or window (selected-window))))
-    (or (and (window-splittable-p window t)
-	     (with-selected-window window
-	       (split-window-right)))
-        (and (window-splittable-p window)
-	     (with-selected-window window
-	       (split-window-below)))
-	(and (eq window (frame-root-window (window-frame window)))
-	     (not (window-minibuffer-p window))
-	     (let ((split-height-threshold 0))
-	       (when (window-splittable-p window)
-		 (with-selected-window window
-		   (split-window-below))))))))
-(setq split-window-preferred-function 'split-window-sensibly-but-prefer-horizontally)
-
 (defun rubify-fqcn (beg end)
   (interactive "r")
   (let ((case-fold-search nil))
