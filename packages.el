@@ -212,3 +212,8 @@
                    (not (or (get-text-property (point) 'part-side)
                             (get-text-property (point) 'block-side)))))
             (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))))
+
+(use-package git-gutter-fringe
+  :config (progn
+            (global-git-gutter-mode +1)
+            (setq git-gutter-fr:side 'right-fringe)))

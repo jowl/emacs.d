@@ -62,6 +62,11 @@
     `(magit-log-sha1 ((t (:foreground ,slick-green+1))))
     `(magit-section-heading ((t (:foreground ,slick-orange-1))))
 
+    ;; git-gutter
+    `(git-gutter:modified ((t (:foreground ,slick-orange-0))))
+    `(git-gutter:added ((t (:foreground ,slick-green-0))))
+    `(git-gutter:deleted ((t (:foreground ,slick-pink-0))))
+
     ;; company
     `(company-echo-common ((t (:foreground ,slick-pink-0))))
     `(company-preview ((t (:foreground ,slick-orange-1 :background ,slick-blue+2))))

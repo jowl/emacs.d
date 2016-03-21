@@ -15,6 +15,7 @@
 (depends-on "flx")
 (depends-on "flx-ido")
 (depends-on "gist")
+(depends-on "git-gutter-fringe")
 (depends-on "go-mode")
 (depends-on "haskell-mode")
 (depends-on "ibuffer-vc")
