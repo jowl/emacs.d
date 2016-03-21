@@ -35,7 +35,7 @@
 (setq browse-url-browser-function 'browse-url-default-macosx-browser)
 (setq delete-by-moving-to-trash t)
 (setq insert-directory-program "gls")
-(bind-key "s-," (lambda () (interactive) (find-file-other-window user-init-file)))
+(bind-key "s-," (lambda () (interactive) (magit-status (f-dirname user-init-file))))
 (bind-key "C-c h" 'query-replace-regexp)
 (bind-key "C-c a" 'align-regexp)
 (setq require-final-newline 'visit)
