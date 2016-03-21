@@ -214,10 +214,22 @@
             (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))))
 
 (use-package git-gutter-fringe
+  :if window-system
+  :demand
+  :init (global-git-gutter-mode t)
   :config (progn
-            (global-git-gutter-mode +1)
-            (setq git-gutter-fr:side 'right-fringe))
-  :bind (("C-x g n" . git-gutter:next-hunk)
+            (setq git-gutter-fr:side 'right-fringe)
+            (fringe-helper-define 'git-gutter-fr:modified nil
+              "........"
+              "...XX..."
+              "..XXXX.."
+              ".XXXXXX."
+              ".XXXXXX."
+              "..XXXX.."
+              "...XX..."
+              "........"))
+  :bind (("C-x g g" . git-gutter)
+         ("C-x g n" . git-gutter:next-hunk)
          ("C-x g p" . git-gutter:previous-hunk)
          ("C-x g s" . git-gutter:stage-hunk)
          ("C-x g v" . git-gutter:revert-hunk)

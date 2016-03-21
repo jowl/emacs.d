@@ -63,9 +63,9 @@
     `(magit-section-heading ((t (:foreground ,slick-orange-1))))
 
     ;; git-gutter
-    `(git-gutter:modified ((t (:foreground ,slick-orange-0))))
-    `(git-gutter:added ((t (:foreground ,slick-green-0))))
-    `(git-gutter:deleted ((t (:foreground ,slick-pink-0))))
+    `(git-gutter-fr:modified ((t (:foreground ,slick-orange+2))))
+    `(git-gutter-fr:added ((t (:foreground ,slick-green+2))))
+    `(git-gutter-fr:deleted ((t (:foreground ,slick-pink+2))))
 
     ;; company
     `(company-echo-common ((t (:foreground ,slick-pink-0))))
