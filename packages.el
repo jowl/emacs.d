@@ -216,4 +216,10 @@
 (use-package git-gutter-fringe
   :config (progn
             (global-git-gutter-mode +1)
-            (setq git-gutter-fr:side 'right-fringe)))
+            (setq git-gutter-fr:side 'right-fringe))
+  :bind (("C-x g n" . git-gutter:next-hunk)
+         ("C-x g p" . git-gutter:previous-hunk)
+         ("C-x g s" . git-gutter:stage-hunk)
+         ("C-x g v" . git-gutter:revert-hunk)
+         ("C-x g TAB" . git-gutter:popup-hunk)
+         ("C-x g SPC" . git-gutter:mark-hunk)))
