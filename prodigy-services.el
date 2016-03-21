@@ -18,6 +18,7 @@
   :name "MongoDB"
   :command "mongod"
   :args '("--config" "/usr/local/etc/mongod.conf")
+  :cwd "/usr/local"
   :ready-message "waiting for connections on port"
   :tags '(hauptbahnhof einheit)
   :kill-process-buffer-on-stop t)
