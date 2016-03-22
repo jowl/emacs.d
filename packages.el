@@ -218,7 +218,6 @@
   :demand
   :init (global-git-gutter-mode t)
   :config (progn
-            (setq git-gutter-fr:side 'right-fringe)
             (fringe-helper-define 'git-gutter-fr:modified nil
               "........"
               "...XX..."
