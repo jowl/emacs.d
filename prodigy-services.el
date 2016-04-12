@@ -30,3 +30,11 @@
   :ready-message "Listening for thrift clients..."
   :tags '(einheit)
   :kill-process-buffer-on-stop t)
+
+(prodigy-define-service
+  :name "Zookeeper"
+  :command "zkServer"
+  :args '("start-foreground")
+  :ready-message "Using config"
+  :tags '(einheit)
+  :kill-process-buffer-on-stop t)
