@@ -208,3 +208,4 @@
       (goto-char beg)
       (insert "Java::"))))
 
+(put 'narrow-to-region 'disabled nil)
