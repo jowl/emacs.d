@@ -25,6 +25,7 @@
 (depends-on "js2-mode")
 (depends-on "kurecolor")
 (depends-on "magit")
+(depends-on "magit-gh-pulls")
 (depends-on "markdown-mode")
 (depends-on "multi-term")
 (depends-on "multiple-cursors")
