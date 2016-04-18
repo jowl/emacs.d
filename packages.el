@@ -48,7 +48,9 @@
    ("C-c b" . magit-blame)))
 
 (use-package magit-gh-pulls
-  :config (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls))
+  :config (progn
+            (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
+            (setq magit-gh-pulls-arguments '("--open-new-in-browser" "--use-pr-editor"))))
 
 (use-package projectile
   :init (projectile-global-mode))
