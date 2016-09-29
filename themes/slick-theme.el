@@ -61,6 +61,7 @@
     `(magit-item-highlight ((t (:background ,slick-blue-1 :inherit nil))))
     `(magit-log-sha1 ((t (:foreground ,slick-green-1))))
     `(magit-section-heading ((t (:foreground ,slick-orange+1))))
+    `(magit-cherry-equivalent ((t (:foreground ,slick-blue+1))))
 
     ;; git-gutter
     `(git-gutter-fr:modified ((t (:foreground ,slick-orange-2))))

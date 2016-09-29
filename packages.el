@@ -12,16 +12,22 @@
 (use-package magit
   :init (progn
           (use-package magit-blame)
-          (use-package evm))
+          (use-package evm
+            :config (defun evm--installation-path ()
+                       "Path to currently selected package."
+                       (let ((path (s-chomp (shell-command-to-string "evm bin"))))
+                         (if (f-exists? path)
+                             (car (s-match (f-join evm-local-path "\\([^/]+\\)") path))
+                           (error "No currently selected Emacs"))))))
   :config
   (progn
     (setq magit-emacsclient-executable (evm-emacsclient))
-    (setq magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
     (setq magit-completing-read-function 'ivy-completing-read)
+    (setq magit-default-tracking-name-function 'magit-default-tracking-name-branch-only)
     (setq magit-highlight-indentation nil)
     (setq magit-highlight-trailing-whitespace 1)
     (setq magit-process-popup-time -1)
-    (setq magit-repository-directories (quote ("~/burtcorp" "~/development" "~/development/go/src/github.com/jowl")))
+    (setq magit-repository-directories '("~/burtcorp" "~/development" "~/development/go/src/github.com/jowl"))
     (setq magit-repository-directiries-depth 1)
     (setq magit-set-upstream-on-push t)
     (setq magit-stage-all-confirm nil)
@@ -32,6 +38,7 @@
     (setq magit-branch-arguments nil)
     (setq magit-push-always-verify nil)
     (setq magit-revert-buffers t)
+    (setq magit-diff-refine-hunk t)
     (add-hook 'magit-mode-hook (lambda () (if (f-file? (f-expand "Gemfile" default-directory)) (rspec-mode)))))
   :bind
   (("C-c g" . magit-status)
@@ -60,8 +67,14 @@
    ("M-/" . mc/edit-lines)))
 
 (use-package yasnippet
-  :init (yas-global-mode)
-  :config (setq yas-snippet-dirs (list (f-expand "snippets" user-emacs-directory))))
+  :init (progn
+    (add-hook 'after-save-hook
+              (lambda ()
+                (when (eql major-mode 'snippet-mode)
+                  (yas-reload-all))))
+    (yas-global-mode))
+  :config (setq yas-snippet-dirs (list (f-expand "snippets" user-emacs-directory)))
+  :mode ("\\.yasnippet" . snippet-mode))
 
 (use-package smartparens-config
   :init
@@ -246,3 +259,21 @@
          ("<f2> i" . counsel-info-lookup-symbol)
          ("<f2> u" . counsel-unicode-char)
          ("C-c C-r" . ivy-resume)))
+
+(use-package yafolding
+  :config (progn
+            (mapc
+             (lambda (hook)
+               (add-hook hook (lambda ()
+                                (yafolding-mode t))))
+             '(json-mode-hook yaml-mode-hook)))
+  :bind (("C-c y e" . yafolding-toggle-element)
+         ("C-c y a" . yafolding-toggle-all)))
+
+
+(use-package json-mode
+  :config (progn
+            (use-package jq-mode
+              :mode ("\\.jq$" . jq-mode)))
+  :mode ("\\.json$" . json-mode)
+  :bind (("C-c j q" . jq-interactively)))
