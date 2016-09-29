@@ -91,6 +91,17 @@
     `(sp-show-pair-match-face ((t (:background ,slick-blue-1))))
     `(sp-show-pair-mismatch-face ((t (:background ,slick-pink-1))))
 
+    ;; ivy
+    `(ivy-confirm-face ((t (:foreground ,slick-green-1))))
+    `(ivy-current-match-face ((t (:foreground ,slick-bw-3 :background ,slick-blue+1))))
+    `(ivy-match-required-face ((t (:foreground ,slick-pink+2))))
+    `(ivy-minibuffer-match-face-1 ((t (:background ,slick-bw-1))))
+    `(ivy-minibuffer-match-face-2 ((t (:background ,slick-blue-1))))
+    `(ivy-minibuffer-match-face-3 ((t (:background ,slick-blue-1))))
+    `(ivy-minibuffer-match-face-4 ((t (:background ,slick-pink-1))))
+    `(ivy-remote-face ((t (:foreground ,slick-blue+2))))
+    `(ivy-remote-face ((t (:foreground ,slick-blue+2))))
+
     ;; default
     `(default ((t (:family "Source Code Pro" :foundry "apple" :height 120 :foreground ,slick-bw+2 :background ,slick-bw-2)))))))
 

@@ -43,6 +43,7 @@
 (depends-on "smart-mode-line")
 (depends-on "smartparens")
 (depends-on "smex")
+(depends-on "swiper")
 (depends-on "swoop")
 (depends-on "typescript-mode")
 (depends-on "use-package")

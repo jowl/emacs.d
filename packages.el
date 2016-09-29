@@ -9,16 +9,6 @@
               (toggle-read-only))
             (add-hook 'compilation-filter-hook '-colorize-compilation-buffer)))
 
-(use-package ido
-  :init (ido-mode 1)
-  :config (progn
-	    (setq ido-enable-flex-matching 1)
-	    (ido-everywhere 1)))
-
-(use-package flx-ido
-  :init (flx-ido-mode 1)
-  :config (setq ido-use-faces nil))
-
 (use-package magit
   :init (progn
           (use-package magit-blame)
@@ -26,8 +16,8 @@
   :config
   (progn
     (setq magit-emacsclient-executable (evm-emacsclient))
-    (setq magit-completing-read-function (quote magit-ido-completing-read))
     (setq magit-default-tracking-name-function (quote magit-default-tracking-name-branch-only))
+    (setq magit-completing-read-function 'ivy-completing-read)
     (setq magit-highlight-indentation nil)
     (setq magit-highlight-trailing-whitespace 1)
     (setq magit-process-popup-time -1)
@@ -53,7 +43,8 @@
             (setq magit-gh-pulls-arguments '("--open-new-in-browser" "--use-pr-editor"))))
 
 (use-package projectile
-  :init (projectile-global-mode))
+  :init (projectile-global-mode)
+  :config (setq projectile-completion-system 'ivy))
 
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
@@ -239,3 +230,19 @@
          ("C-x g v" . git-gutter:revert-hunk)
          ("C-x g TAB" . git-gutter:popup-hunk)
          ("C-x g SPC" . git-gutter:mark-hunk)))
+
+(use-package swiper
+  :config (progn
+            (ivy-mode 1)
+            (setq ivy-initial-inputs-alist nil)
+            (bind-key "C-r" 'ivy-previous-line ivy-minibuffer-map))
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper)
+         ("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("<f1> f" . counsel-describe-function)
+         ("<f1> v" . counsel-describe-variable)
+         ("<f1> l" . counsel-load-library)
+         ("<f2> i" . counsel-info-lookup-symbol)
+         ("<f2> u" . counsel-unicode-char)
+         ("C-c C-r" . ivy-resume)))
