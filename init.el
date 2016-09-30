@@ -15,6 +15,7 @@
 (unless (server-running-p)
   (server-start))
 
+(setq exec-path-from-shell-check-startup-files nil)
 (setq default-directory (f-full (getenv "HOME")))
 (setq inhibit-startup-screen t)
 (setq-default indent-tabs-mode nil)
