@@ -12,7 +12,6 @@
 (depends-on "counsel")
 (depends-on "csharp-mode")
 (depends-on "discover")
-(depends-on "evm")
 (depends-on "exec-path-from-shell")
 (depends-on "f")
 (depends-on "flx")

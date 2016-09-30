@@ -10,18 +10,9 @@
             (add-hook 'compilation-filter-hook '-colorize-compilation-buffer)))
 
 (use-package magit
-  :init (progn
-          (use-package magit-blame)
-          (use-package evm
-            :config (defun evm--installation-path ()
-                       "Path to currently selected package."
-                       (let ((path (s-chomp (shell-command-to-string "evm bin"))))
-                         (if (f-exists? path)
-                             (car (s-match (f-join evm-local-path "\\([^/]+\\)") path))
-                           (error "No currently selected Emacs"))))))
+  :init (use-package magit-blame)
   :config
   (progn
-    (setq magit-emacsclient-executable (evm-emacsclient))
     (setq magit-completing-read-function 'ivy-completing-read)
     (setq magit-default-tracking-name-function 'magit-default-tracking-name-branch-only)
     (setq magit-highlight-indentation nil)
