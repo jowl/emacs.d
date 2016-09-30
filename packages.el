@@ -92,7 +92,6 @@
    ("C-M-f" . sp-forward-sexp)
    ("C-M-b" . sp-backward-sexp)))
 
-(use-package html-mode)
 (use-package discover)
 
 (use-package prodigy
@@ -178,9 +177,6 @@
 (use-package js2-mode
   :mode ("\\.js$" . js2-mode)
   :config (setq-default js2-basic-offset 2))
-
-(use-package js-mode
-  :config (setq js-indent-level 2))
 
 (use-package sh-script
   :config (progn
