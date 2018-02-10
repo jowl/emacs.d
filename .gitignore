@@ -13,3 +13,6 @@ var
 /.cache/
 /games
 /recentf
+/ensime
+/eshell
+/url

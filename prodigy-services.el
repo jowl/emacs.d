@@ -38,3 +38,11 @@
   :ready-message "Using config"
   :tags '(einheit)
   :kill-process-buffer-on-stop t)
+
+(prodigy-define-service
+  :name "Supercrowd frontend"
+  :command "ng"
+  :args '("serve" "--progress=false" "--verbose")
+  :cwd "/Users/joel/burtcorp/hub-app-cdp/frontend"
+  :ready-message "Development Server is listening on"
+  :kill-process-buffer-on-stop t)

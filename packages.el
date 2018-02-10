@@ -4,10 +4,9 @@
 (use-package ansi-color
   :config (progn
             (defun -colorize-compilation-buffer ()
-              (toggle-read-only)
-              (ansi-color-apply-on-region compilation-filter-start (point))
-              (toggle-read-only))
-            (add-hook 'compilation-filter-hook '-colorize-compilation-buffer)))
+              (interactive)
+              (let ((inhibit-read-only t))
+                (ansi-color-apply-on-region (point-min) (point-max))))))
 
 (use-package magit
   :init (use-package magit-blame)
@@ -48,7 +47,10 @@
   :init (add-hook 'after-init-hook 'global-company-mode)
   :config (progn
             (setq company-idle-delay 0.3)
-            (setq company-show-numbers 1)))
+            (setq company-show-numbers 1)
+            (setq company-dabbrev-downcase nil))
+  :bind
+  (("C-<tab>" . company-complete)))
 
 (use-package multiple-cursors
   :bind
@@ -257,10 +259,61 @@
   :bind (("C-c y e" . yafolding-toggle-element)
          ("C-c y a" . yafolding-toggle-all)))
 
-
 (use-package json-mode
   :config (progn
             (use-package jq-mode
-              :mode ("\\.jq$" . jq-mode)))
+              :mode ("\\.jq$" . jq-mode))
+            (setq json-reformat:indent-width 2))
   :mode ("\\.json$" . json-mode)
   :bind (("C-c j q" . jq-interactively)))
+
+(use-package dash-at-point
+  :bind (("C-c i"   . dash-at-point)
+         ("C-c C-i" . dash-at-point-with-docset)))
+
+
+(use-package ag
+  :config (progn
+            (setq ag-highlight-search nil)
+            (setq ag-group-matches nil)
+            (setq ag-reuse-window t)
+            (setq ag-ignore-list (list "node_modules" "vendor.js" "public/assets"))))
+
+(use-package flymd
+  :config (progn
+            (defun my-flymd-browser-function (url)
+              (let ((process-environment (browse-url-process-environment)))
+                (apply 'start-process
+                       (concat "firefox " url)
+                       nil
+                       "/usr/bin/open"
+                       (list "-a" "firefox" url))))
+            (setq flymd-browser-open-function 'my-flymd-browser-function)))
+
+(use-package drag-stuff
+  :init (drag-stuff-global-mode 1)
+  :bind (("M-n" . drag-stuff-down)
+         ("M-p" . drag-stuff-up)))
+
+(use-package dired-sidebar
+  :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
+  :ensure nil
+  :commands (dired-sidebar-toggle-sidebar)
+  :config
+  (use-package all-the-icons-dired
+    ;; M-x all-the-icons-install-fonts
+    :ensure t
+    :commands (all-the-icons-dired-mode)))
+
+(use-package tide
+  :ensure t
+  :config (progn
+            (setq company-tooltip-align-annotations t)
+            ;; (add-hook 'before-save-hook 'tide-format-before-save)
+            (add-hook 'typescript-mode-hook (lambda ()
+                                              (interactive)
+                                              (tide-setup)
+                                              (flycheck-mode +1)
+                                              (eldoc-mode +1)
+                                              (tide-hl-identifier-mode +1)
+                                              (company-mode +1)))))
