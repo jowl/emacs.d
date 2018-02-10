@@ -103,6 +103,13 @@
     `(ivy-remote-face ((t (:foreground ,slick-blue+2))))
     `(ivy-remote-face ((t (:foreground ,slick-blue+2))))
 
+    ;; web-mode
+    `(web-mode-html-tag-face ((t (:weight bold :foreground ,slick-pink-0))))
+    `(web-mode-html-tag-custom-face ((t (:weight bold :foreground ,slick-blue-0))))
+    `(web-mode-html-tag-bracket-face ((t (:foreground ,slick-bw+2))))
+    `(web-mode-html-attr-name-face ((t (:foreground ,slick-blue+1))))
+    `(web-mode-variable-name-face ((t (:foreground ,slick-bw+3))))
+
     ;; default
     `(default ((t (:family "Source Code Pro" :foundry "apple" :height 120 :foreground ,slick-bw+2 :background ,slick-bw-2)))))))
 

@@ -199,6 +199,7 @@
   :config (setq css-indent-offset 2))
 
 (use-package web-mode
+  :mode ("\\.html?$" . web-mode)
   :config (progn
             (setq web-mode-enable-auto-pairing nil)
             (setq web-mode-enable-css-colorization t)
