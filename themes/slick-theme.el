@@ -105,11 +105,11 @@
 
     ;; web-mode
     `(web-mode-html-tag-face ((t (:weight bold :foreground ,slick-pink-0))))
-    `(web-mode-html-tag-custom-face ((t (:weight bold :foreground ,slick-blue-0))))
+    `(web-mode-html-tag-custom-face ((t (:weight bold :foreground ,slick-pink+1))))
     `(web-mode-html-tag-bracket-face ((t (:foreground ,slick-bw+2))))
+    `(web-mode-variable-name-face ((t (:foreground ,slick-orange+1))))
     `(web-mode-html-attr-name-face ((t (:foreground ,slick-blue+1))))
-    `(web-mode-variable-name-face ((t (:foreground ,slick-bw+3))))
-    `(web-mode-block-delimiter-face ((t (:foreground ,slick-orange-0))))
+    `(web-mode-block-delimiter-face ((t (:foreground ,slick-green-0))))
 
     ;; default
     `(default ((t (:family "Source Code Pro" :foundry "apple" :height 120 :foreground ,slick-bw+2 :background ,slick-bw-2)))))))
