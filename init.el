@@ -240,24 +240,15 @@ there's a region, all lines that region covers will be duplicated."
 
 (bind-key "C-c d" 'duplicate-current-line-or-region)
 
-(defun -next-file-with-same-prefix ()
+(defun -other-file-with-same-prefix (select-fn)
   "Cycle between files between the same prefix, e.g. index.css, index.html, index.js"
-    (interactive)
-    (let* ((file-name-base (replace-regexp-in-string "\.[^.]*$" "" (buffer-file-name)))
-           (matching-files (f-entries (f-dirname file-name-base) (lambda (fn) (s-contains-p file-name-base fn)) nil))
-           (index (-elem-index buffer-file-name matching-files))
-           (next-counterpart (nth (% (1+ index) (length matching-files)) matching-files)))
-      (find-file next-counterpart)))
+  (interactive)
+  (let* ((file-name-base (replace-regexp-in-string "\.[^.]*$" "" (buffer-file-name)))
+         (matching-files (f-entries (f-dirname file-name-base) (lambda (fn) (s-contains-p file-name-base fn)) nil))
+         (index (-elem-index buffer-file-name matching-files))
+         (count (length matching-files))
+         (next-counterpart (nth (mod (funcall select-fn index) count) matching-files)))
+    (find-file next-counterpart)))
 
-(defun -prev-file-with-same-prefix ()
-  "Cycle between files between the same prefix, e.g. index.css, index.html, index.js"
-    (interactive)
-    (let* ((file-name-base (replace-regexp-in-string "\.[^.]*$" "" (buffer-file-name)))
-           (matching-files (f-entries (f-dirname file-name-base) (lambda (fn) (s-contains-p file-name-base fn)) nil))
-           (index (-elem-index buffer-file-name matching-files))
-           (count (length matching-files))
-           (next-counterpart (nth (mod (1- index) count) matching-files)))
-      (find-file next-counterpart)))
-
-(bind-key "M-[" '-prev-file-with-same-prefix)
-(bind-key "M-]" '-next-file-with-same-prefix)
+(bind-key "M-[" (lambda () (interactive) (-other-file-with-same-prefix '1-)))
+(bind-key "M-]" (lambda () (interactive) (-other-file-with-same-prefix '1+)))
