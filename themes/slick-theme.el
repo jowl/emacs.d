@@ -110,6 +110,7 @@
     `(web-mode-variable-name-face ((t (:foreground ,slick-orange+1))))
     `(web-mode-html-attr-name-face ((t (:foreground ,slick-blue+1))))
     `(web-mode-block-delimiter-face ((t (:foreground ,slick-green-0))))
+    `(web-mode-current-element-highlight-face ((t (:background ,slick-blue-1))))
 
     ;; default
     `(default ((t (:family "Source Code Pro" :foundry "apple" :height 120 :foreground ,slick-bw+2 :background ,slick-bw-2)))))))
