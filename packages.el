@@ -307,6 +307,9 @@
     :ensure t
     :commands (all-the-icons-dired-mode)))
 
+(use-package typescript-mode
+  :config (setq typescript-indent-level 2))
+
 (use-package tide
   :ensure t
   :config (progn
