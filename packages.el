@@ -17,7 +17,7 @@
     (setq magit-highlight-indentation nil)
     (setq magit-highlight-trailing-whitespace 1)
     (setq magit-process-popup-time -1)
-    (setq magit-repository-directories '("~/burtcorp" "~/development" "~/development/go/src/github.com/jowl"))
+    (setq magit-repository-directories '(("~/burtcorp" . 1) ("~/development" . 1) ("~/development/go/src/github.com/jowl" . 1)))
     (setq magit-repository-directiries-depth 1)
     (setq magit-set-upstream-on-push t)
     (setq magit-stage-all-confirm nil)
@@ -132,6 +132,7 @@
                  :bind (("C-c , g" . -rspec-compilation-buffer))))
   :config (progn
             (setq ruby-deep-indent-paren nil)
+            (setq ruby-insert-encoding-magic-comment nil)
             (add-hook 'dired-mode-hook 'rspec-dired-mode)
             (add-hook 'ruby-mode-hook (lambda ()
                                         (bind-key ", e" '-rspec-verify-single-example rspec-verifiable-mode-keymap)
@@ -178,7 +179,9 @@
 
 (use-package js2-mode
   :mode ("\\.js$" . js2-mode)
-  :config (setq-default js2-basic-offset 2))
+  :config (progn
+            (setq-default js2-basic-offset 2)
+            (setq js2-strict-trailing-comma-warning nil)))
 
 (use-package sh-script
   :config (progn
@@ -265,7 +268,8 @@
   :config (progn
             (use-package jq-mode
               :mode ("\\.jq$" . jq-mode))
-            (setq json-reformat:indent-width 2))
+            (setq json-reformat:indent-width 2)
+            (setq js-indent-level 2))
   :mode ("\\.json$" . json-mode)
   :bind (("C-c j q" . jq-interactively)))
 

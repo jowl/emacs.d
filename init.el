@@ -252,3 +252,4 @@ there's a region, all lines that region covers will be duplicated."
 
 (bind-key "M-[" (lambda () (interactive) (-other-file-with-same-prefix '1-)))
 (bind-key "M-]" (lambda () (interactive) (-other-file-with-same-prefix '1+)))
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
