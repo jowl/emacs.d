@@ -17,8 +17,7 @@
     (setq magit-highlight-indentation nil)
     (setq magit-highlight-trailing-whitespace 1)
     (setq magit-process-popup-time -1)
-    (setq magit-repository-directories '(("~/burtcorp" . 1) ("~/development" . 1) ("~/development/go/src/github.com/jowl" . 1)))
-    (setq magit-repository-directiries-depth 1)
+    (setq magit-repository-directories '(("~/burtcorp" . 1) ("~/development" . 1) ("~/development/go/src/github.com/jowl" . 1) ("~/inovia" . 3)))
     (setq magit-set-upstream-on-push t)
     (setq magit-stage-all-confirm nil)
     (setq magit-unstage-all-confirm nil)
@@ -34,13 +33,10 @@
   (("C-c g" . magit-status)
    ("C-c b" . magit-blame)))
 
-(use-package magit-gh-pulls
-  :config (progn
-            (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
-            (setq magit-gh-pulls-arguments '("--open-new-in-browser" "--use-pr-editor"))))
-
 (use-package projectile
-  :init (projectile-global-mode)
+  :init (progn
+          (projectile-mode +1)
+          (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
   :config (setq projectile-completion-system 'ivy))
 
 (use-package company
