@@ -322,3 +322,8 @@
                                               (eldoc-mode +1)
                                               (tide-hl-identifier-mode +1)
                                               (company-mode +1)))))
+
+(use-package unicode-fonts
+   :ensure t
+   :config
+   (unicode-fonts-setup))
