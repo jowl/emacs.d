@@ -60,6 +60,7 @@
 (bind-key "s-<mouse-1>" 'browse-url-at-mouse)
 (bind-key "s-}" 'other-window)
 (bind-key "s-{" (lambda () (interactive) (other-window -1)))
+(setq ns-right-alternate-modifier 'none)
 
 (defun load-local (file)
   (load (f-expand file user-emacs-directory)))
