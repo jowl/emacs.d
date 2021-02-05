@@ -1,5 +1,3 @@
-(package-initialize)
-
 (require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
 (cask-initialize)
 (require 'pallet)
@@ -227,3 +225,18 @@ there's a region, all lines that region covers will be duplicated."
 (bind-key "M-[" (lambda () (interactive) (-other-file-with-same-prefix '1-)))
 (bind-key "M-]" (lambda () (interactive) (-other-file-with-same-prefix '1+)))
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+;; (custom-set-variables
+;;  ;; custom-set-variables was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(custom-safe-themes
+;;    '("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "62f68a0b49cf383478041c688cc1b82f084f76b84a2ab2819a4ed9ceb59aefd8" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
+;;  '(package-selected-packages
+;;    '(unicode-fonts yaml-mode yafolding web-mode vue-mode use-package tide swoop smex smartparens smart-mode-line sass-mode rvm rspec-mode rbenv rainbow-mode projectile prodigy pallet multiple-cursors multi-term magit-gh-pulls kurecolor json-mode js2-mode jq-mode jade-mode ido-completing-read+ ibuffer-vc haskell-mode groovy-mode gradle-mode go-mode git-gutter-fringe gist flymd flx-ido exec-path-from-shell ess ensime drag-stuff discover dired-sidebar dash-at-point csharp-mode counsel coffee-mode browse-kill-ring auto-complete apib-mode all-the-icons-dired ag ace-jump-mode 0blayout)))
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  )

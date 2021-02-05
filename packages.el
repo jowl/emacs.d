@@ -17,7 +17,7 @@
     (setq magit-highlight-indentation nil)
     (setq magit-highlight-trailing-whitespace 1)
     (setq magit-process-popup-time -1)
-    (setq magit-repository-directories '(("~/burtcorp" . 1) ("~/development" . 1) ("~/development/go/src/github.com/jowl" . 1) ("~/inovia" . 4)))
+    (setq magit-repository-directories '(("~/burtcorp" . 1) ("~/development" . 1) ("~/development/go/src/github.com/jowl" . 1) ("~/inovia" . 5)))
     (setq magit-set-upstream-on-push t)
     (setq magit-stage-all-confirm nil)
     (setq magit-unstage-all-confirm nil)
@@ -53,13 +53,13 @@
    ("M-/" . mc/edit-lines)))
 
 (use-package yasnippet
-  :init (progn
-    (add-hook 'after-save-hook
-              (lambda ()
-                (when (eql major-mode 'snippet-mode)
-                  (yas-reload-all))))
-    (yas-global-mode))
-  :config (setq yas-snippet-dirs (list (f-expand "snippets" user-emacs-directory)))
+  :config (progn
+            (add-hook 'after-save-hook
+                      (lambda ()
+                        (when (eql major-mode 'snippet-mode)
+                          (yas-reload-all))))
+            (yas-global-mode 1)
+            (setq yas-snippet-dirs (list (f-expand "snippets" user-emacs-directory))))
   :mode ("\\.yasnippet" . snippet-mode))
 
 (use-package smartparens-config
