@@ -1,25 +1,33 @@
-(require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
-(cask-initialize)
-(require 'pallet)
-(pallet-mode t)
+(require 'package)
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("org" . "https://orgmode.org/elpa/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
 
 (require 'use-package)
-(require 'f)
-(require 's)
-(require 'dash)
-(dash-enable-font-lock)
+(setq use-package-always-ensure t)
+
+(use-package f)
+(use-package s)
+;(require 'dash)
+;(dash-enable-font-lock)
 
 (require 'server)
 (unless (server-running-p)
   (server-start))
 
-(setq exec-path-from-shell-check-startup-files nil)
+;; (setq exec-path-from-shell-check-startup-files nil)
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 (setq default-directory (f-full (getenv "HOME")))
 (setq inhibit-startup-screen t)
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 (setq standard-indent 2)
-(setq c-basic-offset 2)
+;; (setq c-basic-offset 2)
 (tool-bar-mode -1)
 (setq make-backup-files nil)
 (setq backup-directory-alist
@@ -27,8 +35,8 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 (setq ring-bell-function 'ignore)
-(setq mac-option-key-is-meta t)
-(setq mac-command-key-is-meta nil)
+;; (setq mac-option-key-is-meta t)
+;; (setq mac-command-key-is-meta nil)
 (setq mac-command-modifier 'super)
 (setq mac-option-modifier 'meta)
 (unbind-key "s-q")
@@ -45,9 +53,11 @@
 (column-number-mode t)
 (scroll-bar-mode -1)
 (cua-selection-mode t)
+(show-paren-mode 1)
+(global-hl-line-mode 1)
 (bind-key "C-x C-c" (lambda ()
 		      (interactive)
-		      (when (y-or-n-p "Quit Emacs?")
+		      (when (y-or-n-p "Quit Emacs? ")
 			(save-buffers-kill-emacs))))
 (add-hook 'find-file-hook
           (lambda ()
@@ -59,23 +69,24 @@
 (bind-key "s-}" 'other-window)
 (bind-key "s-{" (lambda () (interactive) (other-window -1)))
 (setq ns-right-alternate-modifier 'none)
+;(setq package-selected-packages '(ag all-the-icons all-the-icons-dired ansi-color company counsel counsel-projectile css-mode dash-at-point discover dockerfile-mode doom-modeline doom-themes drag-stuff exec-path-from-shell flycheck flymd gist git-gutter-fringe haskell-mode ibuffer-vc ivy ivy-prescient ivy-rich jq-mode js2-mode json-mode magit magit-blame misc multi-term multiple-cursors projectile rainbow-mode rspec-mode ruby-mode sh-script smart-mode-line smartparens-config smartparens-haskell smartparens-html smartparens-latex smartparens-ruby smartparens-scala smex swiper tide typescript-mode unicode-fonts web-mode yaml-mode yasnippet))
 
-(defun load-local (file)
-  (load (f-expand file user-emacs-directory)))
+;; (defun load-local (file)
+;;   (load (f-expand file user-emacs-directory)))
 
-(load-local "packages")
+(require 'packages)
 
-(let ((themes-path (f-expand "themes" user-emacs-directory)))
-  (add-to-list 'load-path themes-path)
-  (add-to-list 'custom-theme-load-path themes-path))
-(defun toggle-slick-theme ()
-  (interactive)
-  (let ((slick-next-theme (if (and (boundp 'slick-current-theme) (eq slick-current-theme 'slick)) 'slick-light 'slick)))
-    (let ((sml-next-theme (if (eq slick-next-theme 'slick) 'automatic 'respectful)))
-      (setq slick-current-theme slick-next-theme)
-      (load-theme slick-next-theme t)
-      (sml/apply-theme sml-next-theme))))
-(toggle-slick-theme)
+;; (let ((themes-path (f-expand "themes" user-emacs-directory)))
+;;   (add-to-list 'load-path themes-path)
+;;   (add-to-list 'custom-theme-load-path themes-path))
+;; (defun toggle-slick-theme ()
+;;   (interactive)
+;;   (let ((slick-next-theme (if (and (boundp 'slick-current-theme) (eq slick-current-theme 'slick)) 'slick-light 'slick)))
+;;     (let ((sml-next-theme (if (eq slick-next-theme 'slick) 'automatic 'respectful)))
+;;       (setq slick-current-theme slick-next-theme)
+;;       (load-theme slick-next-theme t)
+;;       (sml/apply-theme sml-next-theme))))
+;; (toggle-slick-theme)
 
 (defun reset-buffers ()
   (interactive)
@@ -146,13 +157,13 @@
           (lambda ()
             (linum-mode t)))
 
-(setq frame-title-format '(:eval (frame-title-function)))
+;; (setq frame-title-format '(:eval (frame-title-function)))
 
-(defun frame-title-function ()
-  (let ((title (if (buffer-file-name) '("%f") '("%b"))))
-    (if (projectile-project-p)
-        (list title " - " (magit-get-current-branch))
-      title)))
+;; (defun frame-title-function ()
+;;   (let ((title (if (buffer-file-name) '("%f") '("%b"))))
+;;     (if (projectile-project-p)
+;;         (list title " - " (magit-get-current-branch))
+;;       title)))
 
 (defun -open-next-line ()
   (interactive)
@@ -240,3 +251,17 @@ there's a region, all lines that region covers will be duplicated."
 ;;  ;; Your init file should contain only one such instance.
 ;;  ;; If there is more than one, they won't work right.
 ;;  )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "62f68a0b49cf383478041c688cc1b82f084f76b84a2ab2819a4ed9ceb59aefd8" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
+ '(package-selected-packages '(f use-package)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

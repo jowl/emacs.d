@@ -1,3 +1,105 @@
+(use-package doom-modeline
+  :init
+  (doom-modeline-mode 1))
+
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (load-theme 'doom-vibrant t)
+  (doom-themes-visual-bell-config)
+  (doom-themes-org-config))
+
+(use-package counsel
+  :demand t)
+(use-package ivy
+  :config
+  (progn
+    (ivy-mode 1)
+    (defun ivy-magit-dir (x)
+      (print (concat "dir" (magit-toplevel (if (f-dir-p x) x (f-dirname x)))))
+      (with-ivy-window
+       (magit-status-internal (magit-toplevel (if (f-dir-p x) x (f-dirname x))))))
+
+    (require 'ivy)
+    (ivy-set-actions
+     'dired
+     '(("g" ivy-magit-dir "magit")))
+    (ivy-set-actions
+     'counsel-find-file
+     '(("g" ivy-magit-dir "magit")))
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-extra-directories nil)
+    (global-set-key "\C-s" 'swiper)
+    (global-set-key (kbd "C-c C-r") 'ivy-resume)
+    (global-set-key (kbd "<f6>") 'ivy-resume)
+    (global-set-key (kbd "M-i") 'ivy-imenu-anywhere)
+    (global-set-key (kbd "M-x") 'counsel-M-x)
+    (global-set-key (kbd "C-x b") 'counsel-switch-buffer)
+    (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+    (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+    (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+    (global-set-key (kbd "<f1> l") 'counsel-load-library)
+    (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+    (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+    (global-set-key (kbd "C-c a") 'counsel-git)
+    (global-set-key (kbd "C-c j") 'counsel-git-grep)
+    (global-set-key (kbd "C-c k") 'counsel-ag)
+    (global-set-key (kbd "C-x l") 'counsel-locate)
+    (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+    (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1)
+  :config
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
+(use-package ivy-prescient
+  :after counsel
+  :custom
+  (ivy-prescient-enable-filtering nil)
+  :config
+  (prescient-persist-mode 1)
+  (ivy-prescient-mode 1))
+
+(use-package ag
+  :config (progn
+            (setq ag-highlight-search nil)
+            (setq ag-group-matches nil)
+            (setq ag-reuse-window t)
+            (setq ag-ignore-list (list "node_modules" "vendor.js" "public/assets"))))
+
+(use-package projectile
+  :init (progn
+          (projectile-mode)
+          (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+  :config (progn
+            (setq projectile-completion-system 'ivy)
+            (add-to-list 'projectile-globally-ignored-files ".DS_Store")
+            (add-to-list 'projectile-globally-ignored-files "node_modules/")
+            (add-to-list 'projectile-globally-ignored-files "*.min.js*")
+            (add-to-list 'projectile-globally-ignored-files "*.bundle.js")
+            (add-to-list 'projectile-globally-ignored-files "dist/"))
+  :bind (:map projectile-mode-map ("C-c p g" . ag-project)))
+(use-package counsel-projectile
+  :ensure t
+  :init (counsel-projectile-mode))
+(use-package dockerfile-mode
+  :ensure t
+  :mode (("^Dockerfile" . dockerfile-mode)))
+
+(use-package all-the-icons)
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
+
+(use-package flycheck
+  :init
+  (setq flycheck-disabled-checkers '(ruby-rubocop ruby-rubylint))
+  :config
+  (progn
+    (add-hook 'after-init-hook 'global-flycheck-mode)))
+
+;; --------------------------------------------------------------------------------
+
 (use-package exec-path-from-shell
   :init (exec-path-from-shell-initialize))
 
@@ -9,32 +111,26 @@
                 (ansi-color-apply-on-region (point-min) (point-max))))))
 
 (use-package magit
-  :init (use-package magit-blame)
+;  :init (use-package magit-blame)
   :config
   (progn
     (setq magit-completing-read-function 'ivy-completing-read)
-    (setq magit-default-tracking-name-function 'magit-default-tracking-name-branch-only)
-    (setq magit-highlight-indentation nil)
-    (setq magit-highlight-trailing-whitespace 1)
+    ;; (setq magit-default-tracking-name-function 'magit-default-tracking-name-branch-only)
+    ;; (setq magit-highlight-indentation nil)
+    ;; (setq magit-highlight-trailing-whitespace 1)
     (setq magit-process-popup-time -1)
     (setq magit-repository-directories '(("~/burtcorp" . 1) ("~/development" . 1) ("~/development/go/src/github.com/jowl" . 1) ("~/inovia" . 5)))
-    (setq magit-set-upstream-on-push t)
-    (setq magit-stage-all-confirm nil)
-    (setq magit-unstage-all-confirm nil)
-    (setq magit-restore-window-configuration t)
-    (setq magit-push-always-verify nil)
-    (setq magit-revert-buffers t)
+    ;; (setq magit-set-upstream-on-push t)
+    ;; (setq magit-stage-all-confirm nil)
+    ;; (setq magit-unstage-all-confirm nil)
+    ;; (setq magit-restore-window-configuration t)
+    ;; (setq magit-push-always-verify nil)
+    ;; (setq magit-revert-buffers t)
     (setq magit-diff-refine-hunk t)
     (add-hook 'magit-mode-hook (lambda () (if (f-file? (f-expand "Gemfile" default-directory)) (rspec-mode)))))
   :bind
   (("C-c g" . magit-status)
    ("C-c b" . magit-blame)))
-
-(use-package projectile
-  :init (progn
-          (projectile-mode +1)
-          (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
-  :config (setq projectile-completion-system 'ivy))
 
 (use-package company
   :init (add-hook 'after-init-hook 'global-company-mode)
@@ -53,45 +149,39 @@
    ("M-/" . mc/edit-lines)))
 
 (use-package yasnippet
-  :config (progn
-            (add-hook 'after-save-hook
-                      (lambda ()
-                        (when (eql major-mode 'snippet-mode)
-                          (yas-reload-all))))
-            (yas-global-mode 1)
-            (setq yas-snippet-dirs (list (f-expand "snippets" user-emacs-directory))))
+  :ensure t
+  :init (setq yas-snippet-dirs (list (f-expand "snippets" user-emacs-directory)))
+  :config
+  (yas-reload-all)
+  (yas-global-mode 1)
   :mode ("\\.yasnippet" . snippet-mode))
 
-(use-package smartparens-config
-  :init
-  (progn
-    (use-package smartparens-html)
-    (use-package smartparens-ruby)
-    (use-package smartparens-scala)
-    (use-package smartparens-latex)
-    (use-package smartparens-haskell)
-    (smartparens-global-mode 1)
-    (show-smartparens-global-mode 1))
-  :bind
-  (("C-M-k" . sp-kill-sexp)
-   ("C-M-w" . sp-copy-sexp)
-   ("C-)"   . sp-forward-slurp-sexp)
-   ("C-("   . sp-backward-slurp-sexp)
-   ("C-}"   . sp-forward-barf-sexp)
-   ("C-{"   . sp-backward-barf-sexp)
-   ;; navigation
-   ("C-M-a" . sp-beginning-of-sexp)
-   ("C-M-e" . sp-end-of-sexp)
-   ("C-M-n" . sp-next-sexp)
-   ("C-M-p" . sp-previous-sexp)
-   ("C-M-f" . sp-forward-sexp)
-   ("C-M-b" . sp-backward-sexp)))
+;; (use-package smartparens-config
+;;   :init
+;;   (progn
+;;     (use-package smartparens-html)
+;;     (use-package smartparens-ruby)
+;;     (use-package smartparens-scala)
+;;     (use-package smartparens-latex)
+;;     (use-package smartparens-haskell)
+;;     (smartparens-global-mode 1)
+;;     (show-smartparens-global-mode 1))
+;;   :bind
+;;   (("C-M-k" . sp-kill-sexp)
+;;    ("C-M-w" . sp-copy-sexp)
+;;    ("C-)"   . sp-forward-slurp-sexp)
+;;    ("C-("   . sp-backward-slurp-sexp)
+;;    ("C-}"   . sp-forward-barf-sexp)
+;;    ("C-{"   . sp-backward-barf-sexp)
+;;    ;; navigation
+;;    ("C-M-a" . sp-beginning-of-sexp)
+;;    ("C-M-e" . sp-end-of-sexp)
+;;    ("C-M-n" . sp-next-sexp)
+;;    ("C-M-p" . sp-previous-sexp)
+;;    ("C-M-f" . sp-forward-sexp)
+;;    ("C-M-b" . sp-backward-sexp)))
 
-(use-package discover)
-
-(use-package prodigy
-  :init (load-local "prodigy-services")
-  :bind (("C-x p" . prodigy)))
+;; (use-package discover)
 
 (use-package ruby-mode
   :init
@@ -138,9 +228,9 @@
          ("Gemfile$" . ruby-mode)
          ("Capfile$" . ruby-mode)))
 
-(use-package smex
-  :init (smex-initialize)
-  :bind ("M-x" . smex))
+;; (use-package smex
+;;   :init (smex-initialize)
+;;   :bind ("M-x" . smex))
 
 (use-package gist)
 
@@ -164,8 +254,8 @@
            '(custom-safe-themes '("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "62f68a0b49cf383478041c688cc1b82f084f76b84a2ab2819a4ed9ceb59aefd8" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
           (sml/setup)))
 
-(use-package misc
-  :bind ("M-z" . zap-up-to-char))
+;; (use-package misc
+;;   :bind ("M-z" . zap-up-to-char))
 
 (use-package rainbow-mode
   :config  (setq rainbow-x-colors nil))
@@ -176,18 +266,7 @@
             (setq-default js2-basic-offset 2)))
 
 (use-package sh-script
-  :config (progn
-            (setq sh-basic-offset 2)
-            (setq sh-indentation 2)))
-
-(use-package coffee-mode
-  :config
-  (progn
-    (add-hook 'coffee-mode-hook
-              (lambda ()
-                (bind-key "C-j" 'coffee-newline-and-indent coffee-mode-map)
-                (bind-key "C-M-h" 'backward-kill-word coffee-mode-map)
-                (setq coffee-tab-width 2)))))
+  :config (setq sh-basic-offset 2))
 
 (use-package css-mode
   :mode (("\\.s?css$" . css-mode))
@@ -230,31 +309,10 @@
          ("C-x g TAB" . git-gutter:popup-hunk)
          ("C-x g SPC" . git-gutter:mark-hunk)))
 
-(use-package swiper
-  :config (progn
-            (ivy-mode 1)
-            (setq ivy-initial-inputs-alist nil)
-            (bind-key "C-r" 'ivy-previous-line ivy-minibuffer-map))
-  :bind (("C-s" . swiper)
-         ("C-r" . swiper)
-         ("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
-         ("<f1> f" . counsel-describe-function)
-         ("<f1> v" . counsel-describe-variable)
-         ("<f1> l" . counsel-load-library)
-         ("<f2> i" . counsel-info-lookup-symbol)
-         ("<f2> u" . counsel-unicode-char)
-         ("C-c C-r" . ivy-resume)))
-
-(use-package yafolding
-  :config (progn
-            (mapc
-             (lambda (hook)
-               (add-hook hook (lambda ()
-                                (yafolding-mode t))))
-             '(json-mode-hook yaml-mode-hook)))
-  :bind (("C-c y e" . yafolding-toggle-element)
-         ("C-c y a" . yafolding-toggle-all)))
+;; (use-package swiper
+;;   :config (bind-key "C-r" 'ivy-previous-line ivy-minibuffer-map)
+;;   :bind (("C-s" . swiper)
+;;          ("C-r" . swiper)))
 
 (use-package json-mode
   :config (progn
@@ -263,19 +321,11 @@
             (setq json-reformat:indent-width 2)
             (setq js-indent-level 2))
   :mode ("\\.json$" . json-mode)
-  :bind (("C-c j q" . jq-interactively)))
+  :bind (("C-c C-j q" . jq-interactively)))
 
 (use-package dash-at-point
   :bind (("C-c i"   . dash-at-point)
          ("C-c C-i" . dash-at-point-with-docset)))
-
-
-(use-package ag
-  :config (progn
-            (setq ag-highlight-search nil)
-            (setq ag-group-matches nil)
-            (setq ag-reuse-window t)
-            (setq ag-ignore-list (list "node_modules" "vendor.js" "public/assets"))))
 
 (use-package flymd
   :config (progn
@@ -293,23 +343,12 @@
   :bind (("M-n" . drag-stuff-down)
          ("M-p" . drag-stuff-up)))
 
-(use-package dired-sidebar
-  :bind (("C-x C-n" . dired-sidebar-toggle-sidebar))
-  :ensure nil
-  :commands (dired-sidebar-toggle-sidebar)
-  :config
-  (use-package all-the-icons-dired
-    ;; M-x all-the-icons-install-fonts
-    :ensure t
-    :commands (all-the-icons-dired-mode)))
-
 (use-package typescript-mode
   :config (setq typescript-indent-level 2))
 
 (use-package tide
   :ensure t
   :config (progn
-            (setq company-tooltip-align-annotations t)
             ;; (add-hook 'before-save-hook 'tide-format-before-save)
             (add-hook 'typescript-mode-hook (lambda ()
                                               (interactive)
@@ -323,3 +362,6 @@
    :ensure t
    :config
    (unicode-fonts-setup))
+
+(provide 'packages)
+
