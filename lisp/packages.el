@@ -119,7 +119,7 @@
     ;; (setq magit-highlight-indentation nil)
     ;; (setq magit-highlight-trailing-whitespace 1)
     (setq magit-process-popup-time -1)
-    (setq magit-repository-directories '(("~/burtcorp" . 1) ("~/development" . 1) ("~/development/go/src/github.com/jowl" . 1) ("~/inovia" . 5)))
+    (setq magit-repository-directories '(("~/development" . 1) ("~/development/go/src/github.com/jowl" . 1)))
     ;; (setq magit-set-upstream-on-push t)
     ;; (setq magit-stage-all-confirm nil)
     ;; (setq magit-unstage-all-confirm nil)
@@ -136,8 +136,7 @@
   :init (add-hook 'after-init-hook 'global-company-mode)
   :config (progn
             (setq company-idle-delay 0.3)
-            (setq company-show-numbers 1)
-            (setq company-dabbrev-downcase nil))
+            (setq company-show-numbers 1))
   :bind
   (("C-<tab>" . company-complete)))
 
