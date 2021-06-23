@@ -236,6 +236,7 @@ there's a region, all lines that region covers will be duplicated."
 (bind-key "M-[" (lambda () (interactive) (-other-file-with-same-prefix '1-)))
 (bind-key "M-]" (lambda () (interactive) (-other-file-with-same-prefix '1+)))
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(electric-pair-mode 1)
 ;; (custom-set-variables
 ;;  ;; custom-set-variables was added by Custom.
 ;;  ;; If you edit it by hand, you could mess it up, so be careful.
