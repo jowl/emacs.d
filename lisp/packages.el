@@ -12,6 +12,7 @@
 
 (use-package counsel
   :demand t)
+
 (use-package ivy
   :config
   (progn
@@ -119,7 +120,7 @@
     ;; (setq magit-highlight-indentation nil)
     ;; (setq magit-highlight-trailing-whitespace 1)
     (setq magit-process-popup-time -1)
-    (setq magit-repository-directories '(("~/development" . 1) ("~/development/go/src/github.com/jowl" . 1)))
+    (setq magit-repository-directories '(("~/development" . 1) ("~/development/go/src/github.com/jowl" . 1) ("~/volvo" . 4)))
     ;; (setq magit-set-upstream-on-push t)
     ;; (setq magit-stage-all-confirm nil)
     ;; (setq magit-unstage-all-confirm nil)
