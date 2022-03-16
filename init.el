@@ -75,7 +75,7 @@
 ;;   (load (f-expand file user-emacs-directory)))
 
 (require 'packages)
-
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 ;; (let ((themes-path (f-expand "themes" user-emacs-directory)))
 ;;   (add-to-list 'load-path themes-path)
 ;;   (add-to-list 'custom-theme-load-path themes-path))
