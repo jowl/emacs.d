@@ -1,3 +1,4 @@
+;; run (all-the-icons-install-fonts) on fresh install
 (use-package doom-modeline
   :init
   (doom-modeline-mode 1))
@@ -344,7 +345,19 @@
          ("M-p" . drag-stuff-up)))
 
 (use-package typescript-mode
-  :config (setq typescript-indent-level 2))
+  :after tree-sitter
+  :config
+  (setq typescript-indent-level 2)
+  ;; we choose this instead of tsx-mode so that eglot can automatically figure out language for server
+  ;; see https://github.com/joaotavora/eglot/issues/624 and https://github.com/joaotavora/eglot#handling-quirky-servers
+  (define-derived-mode typescriptreact-mode typescript-mode
+    "TypeScript TSX")
+
+  ;; use our derived mode for tsx files
+  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescriptreact-mode))
+  ;; by default, typescript-mode is mapped to the treesitter typescript parser
+  ;; use our derived mode to map both .tsx AND .ts -> typescriptreact-mode -> treesitter tsx
+  (add-to-list 'tree-sitter-major-mode-language-alist '(typescriptreact-mode . tsx)))
 
 (use-package tide
   :ensure t
@@ -362,6 +375,16 @@
    :ensure t
    :config
    (unicode-fonts-setup))
+
+(use-package tree-sitter
+  :ensure t
+  :config
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs
+  :ensure t
+  :after tree-sitter)
 
 (provide 'packages)
 
