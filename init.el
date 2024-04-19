@@ -167,7 +167,7 @@
 
 (add-hook 'find-file-hook
           (lambda ()
-            (linum-mode t)))
+            (display-line-numbers-mode t)))
 
 (setq frame-title-format '(:eval (frame-title-function)))
 
