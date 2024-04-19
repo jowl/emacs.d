@@ -78,6 +78,7 @@
             (setq projectile-completion-system 'ivy)
             (add-to-list 'projectile-globally-ignored-files ".DS_Store")
             (add-to-list 'projectile-globally-ignored-files "node_modules/")
+            (add-to-list 'projectile-globally-ignored-files ".yarn/")
             (add-to-list 'projectile-globally-ignored-files "*.min.js*")
             (add-to-list 'projectile-globally-ignored-files "*.bundle.js")
             (add-to-list 'projectile-globally-ignored-files "dist/"))
@@ -390,7 +391,38 @@
   :quelpa (copilot :fetcher github
                    :repo "zerolfx/copilot.el"
                    :branch "main"
-                   :files ("dist" "*.el")))
+                   :files ("dist" "*.el"))
+  :bind (("C-s-<return>" . copilot-accept-completion) ("C-s-<tab>" . copilot-next-completion) ("C-s-n" . copilot-accept-completion-by-line) ("C-s-f" . copilot-accept-completion-by-word)))
+
+(use-package rustic
+  :ensure
+  :bind (:map rustic-mode-map
+              ("M-j" . lsp-ui-imenu)
+              ("M-?" . lsp-find-references)
+              ("C-c C-c l" . flycheck-list-errors)
+              ("C-c C-c a" . lsp-execute-code-action)
+              ("C-c C-c r" . lsp-rename)
+              ("C-c C-c q" . lsp-workspace-restart)
+              ("C-c C-c Q" . lsp-workspace-shutdown)
+              ("C-c C-c s" . lsp-rust-analyzer-status))
+  :config
+  ;; uncomment for less flashiness
+  ;; (setq lsp-eldoc-hook nil)
+  ;; (setq lsp-enable-symbol-highlighting nil)
+  ;; (setq lsp-signature-auto-activate nil)
+
+  ;; comment to disable rustfmt on save
+  (setq rustic-format-on-save t)
+  (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook))
+
+(defun rk/rustic-mode-hook ()
+  ;; so that run C-c C-c C-r works without having to confirm, but don't try to
+  ;; save rust buffers that are not file visiting. Once
+  ;; https://github.com/brotzeit/rustic/issues/253 has been resolved this should
+  ;; no longer be necessary.
+  (when buffer-file-name
+    (setq-local buffer-save-without-query t))
+  (add-hook 'before-save-hook 'lsp-format-buffer nil t))
 
 (provide 'packages)
 
