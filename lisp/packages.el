@@ -424,5 +424,9 @@
     (setq-local buffer-save-without-query t))
   (add-hook 'before-save-hook 'lsp-format-buffer nil t))
 
+(use-package graphql-mode
+  :ensure t
+  :mode ("\\.graphql\\'" "\\.gql\\'"))
+
 (provide 'packages)
 
