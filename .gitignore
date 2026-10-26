@@ -19,3 +19,6 @@ var
 /transient/
 /elpa/
 /quelpa/
+/eln-cache/
+/projectile-frecency.eld
+/.lsp-session-v1
