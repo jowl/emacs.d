@@ -3,9 +3,9 @@
                          ("nongnu" . "https://elpa.nongnu.org/nongnu/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
 (package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
 (unless (package-installed-p 'use-package)
+  (unless package-archive-contents
+    (package-refresh-contents))
   (package-install 'use-package))
 
 ;; Load Customize output early: custom-safe-themes is needed before the theme loads.
@@ -14,6 +14,8 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
+;; Inspect load times with M-x use-package-report.
+(setq use-package-compute-statistics t)
 
 (use-package quelpa)
 (use-package quelpa-use-package)
@@ -59,10 +61,17 @@
 		      (interactive)
 		      (when (y-or-n-p "Quit Emacs? ")
 			(save-buffers-kill-emacs))))
-(add-hook 'find-file-hook
-          (lambda ()
-            (setq show-trailing-whitespace t)))
-(fset 'yes-or-no-p 'y-or-n-p)
+(dolist (hook '(prog-mode-hook text-mode-hook))
+  (add-hook hook (lambda ()
+                   (setq show-trailing-whitespace t)
+                   (display-line-numbers-mode 1))))
+(setq use-short-answers t)
+(savehist-mode 1)
+(save-place-mode 1)
+(recentf-mode 1)
+(setq recentf-max-saved-items 200)
+(global-auto-revert-mode 1)
+(auto-save-visited-mode 1)
 (bind-key "C-v" (lambda () (interactive) (next-line 10) (recenter)))
 (bind-key "M-v" (lambda () (interactive) (previous-line 10) (recenter)))
 (bind-key "s-<mouse-1>" 'browse-url-at-mouse)
@@ -93,25 +102,11 @@
   (interactive "sExample (current project): ")
   (rspec-run (concat (rspec-core-options) " --example " (shell-quote-argument example))))
 
-(defvar closed-files (list))
-
-(defun track-closed-file ()
-  (and buffer-file-name
-       (or (delete buffer-file-name closed-files) t)
-       (add-to-list 'closed-files buffer-file-name)))
-
 (defun recently-closed-files ()
   (interactive)
-  (find-file (ido-completing-read "Recently closed: " closed-files)))
+  (find-file (completing-read "Recently closed: " recentf-list nil t)))
 
-(add-hook 'kill-buffer-hook 'track-closed-file)
 (bind-key "s-T" 'recently-closed-files)
-
-(defadvice sticky-window-keep-window-visible (after sticky-window-mark activate)
-  (let ((mark " ★"))
-    (if (window-dedicated-p (selected-window))
-        (unless (s-ends-with? mark (buffer-name)) (rename-buffer (s-append mark (buffer-name))))
-      (rename-buffer (s-chop-suffix mark (buffer-name))))))
 
 (defun -enlarge-window-horizontally ()
   (interactive)
@@ -132,12 +127,6 @@
 
 (bind-key "C-x }" '-enlarge-window-horizontally)
 (bind-key "C-x {" '-shrink-window-horizontally)
-
-(bind-key "M-g" 'goto-line)
-
-(add-hook 'find-file-hook
-          (lambda ()
-            (display-line-numbers-mode t)))
 
 (setq frame-title-format '(:eval (frame-title-function)))
 
@@ -171,8 +160,12 @@
       (re-search-forward "[A-Z]" end)
       (search-backward "." beg)
       (capitalize-region beg (point))
-      (replace-string "." "::" nil (point) end)
-      (replace-string "." "" nil beg end)
+      (let ((end-marker (copy-marker end)))
+        (while (re-search-forward "\\." end-marker t)
+          (replace-match "::"))
+        (goto-char beg)
+        (while (re-search-forward "\\." end-marker t)
+          (replace-match "")))
       (goto-char beg)
       (insert "Java::"))))
 

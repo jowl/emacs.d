@@ -11,46 +11,44 @@
   (doom-themes-visual-bell-config)
   (doom-themes-org-config))
 
-(use-package counsel
-  :demand t)
+(use-package counsel)
 
 (use-package ivy
   :config
-  (progn
-    (ivy-mode 1)
-    (defun ivy-magit-dir (x)
-      (print (concat "dir" (magit-toplevel (if (f-dir-p x) x (f-dirname x)))))
-      (with-ivy-window
-       (magit-status-internal (magit-toplevel (if (f-dir-p x) x (f-dirname x))))))
+  (ivy-mode 1)
+  (defun ivy-magit-dir (x)
+    (print (concat "dir" (magit-toplevel (if (f-dir-p x) x (f-dirname x)))))
+    (with-ivy-window
+     (magit-status-internal (magit-toplevel (if (f-dir-p x) x (f-dirname x))))))
 
-    (require 'ivy)
-    (ivy-set-actions
-     'dired
-     '(("g" ivy-magit-dir "magit")))
-    (ivy-set-actions
-     'counsel-find-file
-     '(("g" ivy-magit-dir "magit")))
-    (setq ivy-use-virtual-buffers t)
-    (setq ivy-extra-directories '("../" "./"))
-    (setopt ivy-use-selectable-prompt t)
-    (global-set-key "\C-s" 'swiper)
-    (global-set-key (kbd "C-c C-r") 'ivy-resume)
-    (global-set-key (kbd "<f6>") 'ivy-resume)
-    (global-set-key (kbd "M-i") 'ivy-imenu-anywhere)
-    (global-set-key (kbd "M-x") 'counsel-M-x)
-    (global-set-key (kbd "C-x b") 'counsel-switch-buffer)
-    (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-    (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-    (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-    (global-set-key (kbd "<f1> l") 'counsel-load-library)
-    (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-    (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-    (global-set-key (kbd "C-c a") 'counsel-git)
-    (global-set-key (kbd "C-c j") 'counsel-git-grep)
-    (global-set-key (kbd "C-c k") 'counsel-ag)
-    (global-set-key (kbd "C-x l") 'counsel-locate)
-    (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-    (define-key read-expression-map (kbd "C-r") 'counsel-expression-history)))
+  (require 'ivy)
+  (ivy-set-actions
+   'dired
+   '(("g" ivy-magit-dir "magit")))
+  (ivy-set-actions
+   'counsel-find-file
+   '(("g" ivy-magit-dir "magit")))
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-extra-directories '("../" "./"))
+  (setopt ivy-use-selectable-prompt t)
+  (global-set-key "\C-s" 'swiper)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "<f6>") 'ivy-resume)
+  (global-set-key (kbd "M-i") 'ivy-imenu-anywhere)
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x b") 'counsel-switch-buffer)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  (global-set-key (kbd "<f1> l") 'counsel-load-library)
+  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+  (global-set-key (kbd "C-c a") 'counsel-git)
+  (global-set-key (kbd "C-c j") 'counsel-git-grep)
+  (global-set-key (kbd "C-c k") 'counsel-ag)
+  (global-set-key (kbd "C-x l") 'counsel-locate)
+  (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
 (use-package ivy-rich
   :init
   (ivy-rich-mode 1)
@@ -65,30 +63,28 @@
   (ivy-prescient-mode 1))
 
 (use-package ag
-  :config (progn
-            (setq ag-highlight-search nil)
-            (setq ag-group-matches nil)
-            (setq ag-reuse-window t)
-            (setq ag-ignore-list (list "node_modules" "vendor.js" "public/assets"))))
+  :config
+  (setq ag-highlight-search nil)
+  (setq ag-group-matches nil)
+  (setq ag-reuse-window t)
+  (setq ag-ignore-list (list "node_modules" "vendor.js" "public/assets")))
 
 (use-package projectile
-  :init (progn
-          (projectile-mode)
-          (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
-  :config (progn
-            (setq projectile-completion-system 'ivy)
-            (add-to-list 'projectile-globally-ignored-files ".DS_Store")
-            (add-to-list 'projectile-globally-ignored-files "node_modules/")
-            (add-to-list 'projectile-globally-ignored-files ".yarn/")
-            (add-to-list 'projectile-globally-ignored-files "*.min.js*")
-            (add-to-list 'projectile-globally-ignored-files "*.bundle.js")
-            (add-to-list 'projectile-globally-ignored-files "dist/"))
+  :init
+  (projectile-mode)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  :config
+  (setq projectile-completion-system 'ivy)
+  (add-to-list 'projectile-globally-ignored-files ".DS_Store")
+  (add-to-list 'projectile-globally-ignored-files "node_modules/")
+  (add-to-list 'projectile-globally-ignored-files ".yarn/")
+  (add-to-list 'projectile-globally-ignored-files "*.min.js*")
+  (add-to-list 'projectile-globally-ignored-files "*.bundle.js")
+  (add-to-list 'projectile-globally-ignored-files "dist/")
   :bind (:map projectile-mode-map ("C-c p g" . ag-project)))
 (use-package counsel-projectile
-  :ensure t
   :init (counsel-projectile-mode))
 (use-package dockerfile-mode
-  :ensure t
   :mode (("^Dockerfile" . dockerfile-mode)))
 
 (use-package nerd-icons)
@@ -98,9 +94,7 @@
 (use-package flycheck
   :init
   (setq flycheck-disabled-checkers '(ruby-rubocop ruby-rubylint))
-  :config
-  (progn
-    (add-hook 'after-init-hook 'global-flycheck-mode)))
+  :hook (after-init . global-flycheck-mode))
 
 ;; --------------------------------------------------------------------------------
 
@@ -108,39 +102,37 @@
   :init (exec-path-from-shell-initialize))
 
 (use-package ansi-color
-  :config (progn
-            (defun -colorize-compilation-buffer ()
-              (interactive)
-              (let ((inhibit-read-only t))
-                (ansi-color-apply-on-region (point-min) (point-max))))))
+  :config (defun -colorize-compilation-buffer ()
+            (interactive)
+            (let ((inhibit-read-only t))
+              (ansi-color-apply-on-region (point-min) (point-max)))))
 
 (use-package magit
-;  :init (use-package magit-blame)
+					;  :init (use-package magit-blame)
   :config
-  (progn
-    (setq magit-completing-read-function 'ivy-completing-read)
-    ;; (setq magit-default-tracking-name-function 'magit-default-tracking-name-branch-only)
-    ;; (setq magit-highlight-indentation nil)
-    ;; (setq magit-highlight-trailing-whitespace 1)
-    (setq magit-process-popup-time -1)
-    (setq magit-repository-directories '(("~/development" . 1) ("~/development/go/src/github.com/jowl" . 1) ("~/volvo" . 4)))
-    ;; (setq magit-set-upstream-on-push t)
-    ;; (setq magit-stage-all-confirm nil)
-    ;; (setq magit-unstage-all-confirm nil)
-    ;; (setq magit-restore-window-configuration t)
-    ;; (setq magit-push-always-verify nil)
-    ;; (setq magit-revert-buffers t)
-    (setq magit-diff-refine-hunk t)
-    (add-hook 'magit-mode-hook (lambda () (if (f-file? (f-expand "Gemfile" default-directory)) (rspec-mode)))))
+  (setq magit-completing-read-function 'ivy-completing-read)
+  ;; (setq magit-default-tracking-name-function 'magit-default-tracking-name-branch-only)
+  ;; (setq magit-highlight-indentation nil)
+  ;; (setq magit-highlight-trailing-whitespace 1)
+  (setq magit-process-popup-time -1)
+  (setq magit-repository-directories '(("~/development" . 1) ("~/development/go/src/github.com/jowl" . 1) ("~/volvo" . 4)))
+  ;; (setq magit-set-upstream-on-push t)
+  ;; (setq magit-stage-all-confirm nil)
+  ;; (setq magit-unstage-all-confirm nil)
+  ;; (setq magit-restore-window-configuration t)
+  ;; (setq magit-push-always-verify nil)
+  ;; (setq magit-revert-buffers t)
+  (setq magit-diff-refine-hunk t)
+  (add-hook 'magit-mode-hook (lambda () (if (f-file? (f-expand "Gemfile" default-directory)) (rspec-mode))))
   :bind
   (("C-c g" . magit-status)
    ("C-c b" . magit-blame)))
 
 (use-package company
-  :init (add-hook 'after-init-hook 'global-company-mode)
-  :config (progn
-            (setq company-idle-delay 0.3)
-            (setq company-show-numbers 1))
+  :hook (after-init . global-company-mode)
+  :config
+  (setq company-idle-delay 0.3)
+  (setq company-show-numbers 1)
   :bind
   (("C-<tab>" . company-complete)))
 
@@ -152,7 +144,6 @@
    ("M-/" . mc/edit-lines)))
 
 (use-package yasnippet
-  :ensure t
   :init (setq yas-snippet-dirs (list (f-expand "snippets" user-emacs-directory)))
   :config
   (yas-reload-all)
@@ -187,43 +178,39 @@
 ;; (use-package discover)
 
 (use-package ruby-mode
-  :init
-  (progn
-    (use-package rspec-mode
-                 :config
-                 (progn
-                   (defun -rspec-compile (orig target &optional opts)
-                     (interactive "P")
-                     (let ((opts (if current-prefix-arg
-                                     (cons "--fail-fast" opts)
-                                   opts))
-                           (shell-command-switch "-lc"))
-                       (apply orig (list target opts))))
-                   (defun -rspec-compilation-buffer ()
-                     (interactive)
-                     (set-window-buffer (selected-window) (get-buffer "*rspec-compilation*")))
-                   (advice-add 'rspec-compile :around '-rspec-compile)
-                   (setq rspec-spec-command "rbenv exec bundle exec rspec")
-                   (setq rspec-use-bundler-when-possible nil)
-                   (setq rspec-use-zeus-when-possible nil)
-                   (setq rspec-use-rake-when-possible nil)
-                   (setq rspec-use-spring-when-possible nil)
-                   (add-hook 'compilation-mode-hook
-                             (lambda ()
-                               (when (eq major-mode 'rspec-compilation-mode)
-                                 (setq compilation-scroll-output t)
-                                 (local-set-key (kbd "g") (lambda ()
-                                                            (interactive)
-                                                            (rspec-rerun)))))))
-                 :bind (("C-c , g" . -rspec-compilation-buffer))))
-  :config (progn
-            (setq ruby-deep-indent-paren nil)
-            (setq ruby-insert-encoding-magic-comment nil)
-            (add-hook 'dired-mode-hook 'rspec-dired-mode)
-            ;; (add-hook 'ruby-mode-hook (lambda ()
-            ;;                             (bind-key ", e" '-rspec-verify-single-example rspec-verifiable-mode-keymap)
-            ;;                             (bind-key ", E" '-rspec-verify-example rspec-verifiable-mode-keymap)))
-            (setq ruby-align-to-stmt-keywords '(begin if while unless until case for)))
+  :init (use-package rspec-mode
+          :config (defun -rspec-compile (orig target &optional opts)
+                    (interactive "P")
+                    (let ((opts (if current-prefix-arg
+                                    (cons "--fail-fast" opts)
+                                  opts))
+                          (shell-command-switch "-lc"))
+                      (apply orig (list target opts))))
+          (defun -rspec-compilation-buffer ()
+            (interactive)
+            (set-window-buffer (selected-window) (get-buffer "*rspec-compilation*")))
+          (advice-add 'rspec-compile :around '-rspec-compile)
+          (setq rspec-spec-command "rbenv exec bundle exec rspec")
+          (setq rspec-use-bundler-when-possible nil)
+          (setq rspec-use-zeus-when-possible nil)
+          (setq rspec-use-rake-when-possible nil)
+          (setq rspec-use-spring-when-possible nil)
+          (add-hook 'compilation-mode-hook
+                    (lambda ()
+                      (when (eq major-mode 'rspec-compilation-mode)
+                        (setq compilation-scroll-output t)
+                        (local-set-key (kbd "g") (lambda ()
+                                                   (interactive)
+                                                   (rspec-rerun))))))
+          :bind (("C-c , g" . -rspec-compilation-buffer)))
+  :config
+  (setq ruby-deep-indent-paren nil)
+  (setq ruby-insert-encoding-magic-comment nil)
+  (add-hook 'dired-mode-hook 'rspec-dired-mode)
+  ;; (add-hook 'ruby-mode-hook (lambda ()
+  ;;                             (bind-key ", e" '-rspec-verify-single-example rspec-verifiable-mode-keymap)
+  ;;                             (bind-key ", E" '-rspec-verify-example rspec-verifiable-mode-keymap)))
+  (setq ruby-align-to-stmt-keywords '(begin if while unless until case for))
   :mode (("\\.rake$" . ruby-mode)
          ("\\.gemspec$" . ruby-mode)
          ("\\.ru$" . ruby-mode)
@@ -235,8 +222,6 @@
 ;;   :init (smex-initialize)
 ;;   :bind ("M-x" . smex))
 
-(use-package gist)
-
 (use-package multi-term
   :init (setq multi-term-program "/bin/zsh"))
 
@@ -247,17 +232,12 @@
   :init (ibuffer-vc-set-filter-groups-by-vc-root)
   :bind ("C-x C-b" . ibuffer))
 
-(use-package haskell-mode
-  :init (progn (add-hook 'haskell-mode-hook 'haskell-indent-mode)
-               (add-hook 'haskell-mode-hook 'interactive-haskell-mode)))
-
 (use-package rainbow-mode
   :config  (setq rainbow-x-colors nil))
 
 (use-package js2-mode
   :mode ("\\.js$" . js2-mode)
-  :config (progn
-            (setq-default js2-basic-offset 2)))
+  :config (setq-default js2-basic-offset 2))
 
 (use-package sh-script
   :config (setq sh-basic-offset 2))
@@ -268,28 +248,27 @@
 
 (use-package web-mode
   :mode ("\\.html?$" . web-mode)
-  :config (progn
-            (setq web-mode-enable-auto-pairing t)
-            (setq web-mode-enable-css-colorization t)
-            (setq web-mode-markup-indent-offset 2)
-            (setq web-mode-css-indent-offset 2)
-            (setq web-mode-code-indent-offset 2)
-            (setq web-mode-enable-current-element-highlight t)))
+  :config
+  (setq web-mode-enable-auto-pairing nil)
+  (setq web-mode-enable-css-colorization t)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-enable-current-element-highlight t))
 
 (use-package git-gutter-fringe
   :if window-system
   :demand
   :init (global-git-gutter-mode t)
-  :config (progn
-            (fringe-helper-define 'git-gutter-fr:modified nil
-              "........"
-              "...XX..."
-              "..XXXX.."
-              ".XXXXXX."
-              ".XXXXXX."
-              "..XXXX.."
-              "...XX..."
-              "........"))
+  :config (fringe-helper-define 'git-gutter-fr:modified nil
+				"........"
+				"...XX..."
+				"..XXXX.."
+				".XXXXXX."
+				".XXXXXX."
+				"..XXXX.."
+				"...XX..."
+				"........")
   :bind (("C-x g g" . git-gutter)
          ("C-x g n" . git-gutter:next-hunk)
          ("C-x g p" . git-gutter:previous-hunk)
@@ -304,28 +283,12 @@
 ;;          ("C-r" . swiper)))
 
 (use-package json-mode
-  :config (progn
-            (use-package jq-mode
-              :mode ("\\.jq$" . jq-mode))
-            (setq json-reformat:indent-width 2)
-            (setq js-indent-level 2))
+  :config (use-package jq-mode
+            :mode ("\\.jq$" . jq-mode))
+  (setq json-reformat:indent-width 2)
+  (setq js-indent-level 2)
   :mode ("\\.json$" . json-mode)
   :bind (("C-c C-j q" . jq-interactively)))
-
-(use-package dash-at-point
-  :bind (("C-c i"   . dash-at-point)
-         ("C-c C-i" . dash-at-point-with-docset)))
-
-(use-package flymd
-  :config (progn
-            (defun my-flymd-browser-function (url)
-              (let ((process-environment (browse-url-process-environment)))
-                (apply 'start-process
-                       (concat "firefox " url)
-                       nil
-                       "/usr/bin/open"
-                       (list "-a" "firefox" url))))
-            (setq flymd-browser-open-function 'my-flymd-browser-function)))
 
 (use-package drag-stuff
   :init (drag-stuff-global-mode 1)
@@ -348,30 +311,26 @@
   (add-to-list 'tree-sitter-major-mode-language-alist '(typescriptreact-mode . tsx)))
 
 (use-package tide
-  :ensure t
-  :config (progn
-            ;; (add-hook 'before-save-hook 'tide-format-before-save)
-            (add-hook 'typescript-mode-hook (lambda ()
-                                              (interactive)
-                                              (tide-setup)
-                                              (flycheck-mode +1)
-                                              (eldoc-mode +1)
-                                              (tide-hl-identifier-mode +1)
-                                              (company-mode +1)))))
+  :config
+  ;; (add-hook 'before-save-hook 'tide-format-before-save)
+  (add-hook 'typescript-mode-hook (lambda ()
+                                    (interactive)
+                                    (tide-setup)
+                                    (flycheck-mode +1)
+                                    (eldoc-mode +1)
+                                    (tide-hl-identifier-mode +1)
+                                    (company-mode +1))))
 
 (use-package unicode-fonts
-   :ensure t
-   :config
-   (unicode-fonts-setup))
+  :config
+  (unicode-fonts-setup))
 
 (use-package tree-sitter
-  :ensure t
   :config
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (use-package tree-sitter-langs
-  :ensure t
   :after tree-sitter)
 
 (use-package copilot
@@ -418,7 +377,6 @@
   (add-hook 'before-save-hook 'lsp-format-buffer nil t))
 
 (use-package graphql-mode
-  :ensure t
   :mode ("\\.graphql\\'" "\\.gql\\'"))
 
 (provide 'packages)
