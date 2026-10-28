@@ -251,15 +251,6 @@
   :init (progn (add-hook 'haskell-mode-hook 'haskell-indent-mode)
                (add-hook 'haskell-mode-hook 'interactive-haskell-mode)))
 
-(use-package smart-mode-line
-  :init (progn
-          (custom-set-variables
-           '(custom-safe-themes '("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "62f68a0b49cf383478041c688cc1b82f084f76b84a2ab2819a4ed9ceb59aefd8" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
-          (sml/setup)))
-
-;; (use-package misc
-;;   :bind ("M-z" . zap-up-to-char))
-
 (use-package rainbow-mode
   :config  (setq rainbow-x-colors nil))
 
@@ -283,12 +274,7 @@
             (setq web-mode-markup-indent-offset 2)
             (setq web-mode-css-indent-offset 2)
             (setq web-mode-code-indent-offset 2)
-            (setq web-mode-enable-current-element-highlight t)
-            (defun sp-web-mode-is-code-context (id action context)
-              (and (eq action 'insert)
-                   (not (or (get-text-property (point) 'part-side)
-                            (get-text-property (point) 'block-side)))))
-            (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))))
+            (setq web-mode-enable-current-element-highlight t)))
 
 (use-package git-gutter-fringe
   :if window-system
@@ -394,6 +380,12 @@
                    :branch "main"
                    :files ("dist" "*.el"))
   :bind (("C-s-<return>" . copilot-accept-completion) ("C-s-<tab>" . copilot-next-completion) ("C-s-n" . copilot-accept-completion-by-line) ("C-s-f" . copilot-accept-completion-by-word)))
+
+(use-package lsp-mode
+  :commands lsp)
+
+(use-package lsp-ui
+  :after lsp-mode)
 
 (use-package rustic
   :ensure

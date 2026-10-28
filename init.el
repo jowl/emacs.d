@@ -1,12 +1,16 @@
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")
+                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
+
+;; Load Customize output early: custom-safe-themes is needed before the theme loads.
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file 'noerror 'nomessage)
 
 (require 'use-package)
 (setq use-package-always-ensure t)
@@ -16,21 +20,17 @@
 
 (use-package f)
 (use-package s)
-;(require 'dash)
-;(dash-enable-font-lock)
 
 (require 'server)
 (unless (server-running-p)
   (server-start))
 
-;; (setq exec-path-from-shell-check-startup-files nil)
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path (expand-file-name "lisp/" user-emacs-directory))
 (setq default-directory (f-full (getenv "HOME")))
 (setq inhibit-startup-screen t)
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 (setq standard-indent 2)
-;; (setq c-basic-offset 2)
 (tool-bar-mode -1)
 (setq make-backup-files nil)
 (setq backup-directory-alist
@@ -38,18 +38,15 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 (setq ring-bell-function 'ignore)
-;; (setq mac-option-key-is-meta t)
-;; (setq mac-command-key-is-meta nil)
 (setq mac-command-modifier 'super)
 (setq mac-option-modifier 'meta)
 (unbind-key "s-q")
 (menu-bar-mode 1)
 (setq browse-url-browser-function 'browse-url-default-macosx-browser)
 (setq delete-by-moving-to-trash t)
-(setq insert-directory-program "gls")
 (bind-key "s-," (lambda () (interactive) (magit-status (f-dirname user-init-file))))
 (bind-key "C-c h" 'query-replace-regexp)
-(bind-key "C-c a" 'align-regexp)
+(bind-key "C-c A" 'align-regexp)
 (setq require-final-newline 'visit)
 (setq mode-require-final-newline nil)
 (windmove-default-keybindings 'super)
@@ -72,24 +69,7 @@
 (bind-key "s-}" 'other-window)
 (bind-key "s-{" (lambda () (interactive) (other-window -1)))
 (setq ns-right-alternate-modifier 'none)
-;(setq package-selected-packages '(ag all-the-icons all-the-icons-dired ansi-color company counsel counsel-projectile css-mode dash-at-point discover dockerfile-mode doom-modeline doom-themes drag-stuff exec-path-from-shell flycheck flymd gist git-gutter-fringe haskell-mode ibuffer-vc ivy ivy-prescient ivy-rich jq-mode js2-mode json-mode magit magit-blame misc multi-term multiple-cursors projectile rainbow-mode rspec-mode ruby-mode sh-script smart-mode-line smartparens-config smartparens-haskell smartparens-html smartparens-latex smartparens-ruby smartparens-scala smex swiper tide typescript-mode unicode-fonts web-mode yaml-mode yasnippet))
-
-;; (defun load-local (file)
-;;   (load (f-expand file user-emacs-directory)))
-
 (require 'packages)
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-;; (let ((themes-path (f-expand "themes" user-emacs-directory)))
-;;   (add-to-list 'load-path themes-path)
-;;   (add-to-list 'custom-theme-load-path themes-path))
-;; (defun toggle-slick-theme ()
-;;   (interactive)
-;;   (let ((slick-next-theme (if (and (boundp 'slick-current-theme) (eq slick-current-theme 'slick)) 'slick-light 'slick)))
-;;     (let ((sml-next-theme (if (eq slick-next-theme 'slick) 'automatic 'respectful)))
-;;       (setq slick-current-theme slick-next-theme)
-;;       (load-theme slick-next-theme t)
-;;       (sml/apply-theme sml-next-theme))))
-;; (toggle-slick-theme)
 
 (defun reset-buffers ()
   (interactive)
@@ -117,7 +97,6 @@
 
 (defun track-closed-file ()
   (and buffer-file-name
-       (message buffer-file-name)
        (or (delete buffer-file-name closed-files) t)
        (add-to-list 'closed-files buffer-file-name)))
 
@@ -165,7 +144,7 @@
 (defun frame-title-function ()
   (let ((title (if (buffer-file-name) '("%f") '("%b"))))
     (if (projectile-project-p)
-        (list title " - " (magit-get-current-name))
+        (list title " - " (magit-get-current-branch))
       title)))
 
 (defun -open-next-line ()
@@ -244,45 +223,3 @@ there's a region, all lines that region covers will be duplicated."
 (setq insert-directory-program "gls" dired-use-ls-dired t)
 (setq dired-listing-switches "-al --group-directories-first")
 
-;; (custom-set-variables
-;;  ;; custom-set-variables was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(custom-safe-themes
-;;    '("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "62f68a0b49cf383478041c688cc1b82f084f76b84a2ab2819a4ed9ceb59aefd8" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default))
-;;  '(package-selected-packages
-;;    '(unicode-fonts yaml-mode yafolding web-mode vue-mode use-package tide swoop smex smartparens smart-mode-line sass-mode rvm rspec-mode rbenv rainbow-mode projectile prodigy pallet multiple-cursors multi-term magit-gh-pulls kurecolor json-mode js2-mode jq-mode jade-mode ido-completing-read+ ibuffer-vc haskell-mode groovy-mode gradle-mode go-mode git-gutter-fringe gist flymd flx-ido exec-path-from-shell ess ensime drag-stuff discover dired-sidebar dash-at-point csharp-mode counsel coffee-mode browse-kill-ring auto-complete apib-mode all-the-icons-dired ag ace-jump-mode 0blayout)))
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223"
-     "62f68a0b49cf383478041c688cc1b82f084f76b84a2ab2819a4ed9ceb59aefd8"
-     "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e"
-     "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa"
-     default))
- '(package-selected-packages
-   '(ag company copilot counsel-projectile dash-at-point dockerfile-mode
-        doom-modeline doom-themes drag-stuff ess exec-path-from-shell
-        flymd gist git-gutter-fringe go-mode graphql-mode haskell-mode
-        ibuffer-vc ivy-prescient ivy-rich jq-mode js2-mode json-mode
-        kubernetes-helm lsp-mode magit multi-term multiple-cursors
-        nerd-icons-dired prettier quelpa-use-package rainbow-mode
-        rspec-mode rustic smart-mode-line svelte-mode tide
-        tree-sitter-langs typescript-mode unicode-fonts web-mode
-        yasnippet)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
