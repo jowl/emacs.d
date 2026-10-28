@@ -16,30 +16,10 @@
 - Project: `projectile` replaced by built-in `project.el` (`C-c p` prefix kept; `g` -> `consult-ripgrep`, `b` -> `consult-project-buffer`).
 - `quelpa` removed; `copilot` installs via `use-package :vc`. Setup needs Node and `M-x copilot-install-server`. On an existing install, delete the old `elpa/copilot-*` (quelpa-built) directory and restart to switch to the VC checkout.
 - LSP and syntax: `tree-sitter`/`tide`/`rustic`/`lsp-mode`/`typescript-mode` replaced by built-in `treesit` (`rust-ts-mode`, `typescript-ts-mode`, `tsx-ts-mode`) + `eglot`. Run `M-x -treesit-install-missing-grammars` once (needs git + a C compiler) and install `rust-analyzer` and `typescript-language-server`. Rustic cargo commands are gone (use `compile`).
+- Diagnostics: `flycheck` replaced by `flymake` (enabled in `prog-mode`; ruby uses `ruby -wc`, rubocop stays off).
+- Small improvements: dead-code cleanup, `recentf`-based recent files, hook/default modernisation, `progn` unwrapping and conditional `package-refresh-contents`.
 
-## Planned (not yet applied; each is a behaviour change, do separately)
+## Planned
 
-### 1. Cleanup and correctness
-- Convert `defadvice sticky-window-keep-window-visible` to `advice-add`; that package is never required/installed, so either add it or delete the advice.
-- `recently-closed-files` uses `ido-completing-read`; replace with `recentf` + `completing-read` (or `consult-recent-file`) and drop manual `closed-files` tracking.
-- `rubify-fqcn`: replace interactive-only `replace-string` with `re-search-forward` + `replace-match`.
-- `M-g` -> `goto-line` shadows the `M-g` goto prefix; use `M-g g` or leave default.
-- Decide between `electric-pair-mode` and `web-mode-enable-auto-pairing`.
-- Prune `package-selected-packages` of unused packages (`ess`, `haskell-mode`, `dash-at-point`, `flymd`, `gist`, `kubernetes-helm`, `prettier`, `svelte-mode` if unused).
-- `prodigy-services.el`: not loaded by init and contains hardcoded `/usr/local/Cellar/...` paths (Apple Silicon uses `/opt/homebrew`); review for secrets, update or delete.
-
-### 2. Hooks and defaults
-- Replace per-file `find-file-hook` for line numbers/trailing whitespace with `prog-mode-hook`/`text-mode-hook` (or `global-display-line-numbers-mode`).
-- `(setq use-short-answers t)` instead of `fset 'yes-or-no-p`.
-- Add `savehist-mode`, `save-place-mode`, `recentf-mode`, `global-auto-revert-mode`, `auto-save-visited-mode`.
-
-### 3. Startup performance
-- Drop `(progn ...)` wrappers inside `:config`; use `:hook`, `:bind`, `:commands` so packages lazy-load; remove unnecessary `:demand`/`:ensure t` (already `use-package-always-ensure`).
-- Avoid `package-refresh-contents` at every cold start; only refresh when installing.
-- Measure first with `M-x use-package-report` (set `use-package-compute-statistics`).
-
-### 4. Larger modernisation (one PR each)
-3. **Diagnostics:** `flycheck` -> `flymake` (integrates with eglot).
-
-### 5. Documentation
+### Documentation
 - Add a README with fresh-install steps: `nerd-icons-install-fonts`, `gls` (coreutils), Node for copilot, rbenv.

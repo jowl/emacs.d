@@ -70,10 +70,11 @@
 (use-package nerd-icons-dired
   :hook (dired-mode . nerd-icons-dired-mode))
 
-(use-package flycheck
-  :init
-  (setq flycheck-disabled-checkers '(ruby-rubocop ruby-rubylint))
-  :hook (after-init . global-flycheck-mode))
+(use-package flymake
+  :ensure nil
+  :hook (prog-mode . flymake-mode)
+  :custom
+  (ruby-flymake-use-rubocop-if-available nil))
 
 ;; --------------------------------------------------------------------------------
 
