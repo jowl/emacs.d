@@ -22,3 +22,5 @@ var
 /eln-cache/
 /projectile-frecency.eld
 /.lsp-session-v1
+/history
+/places

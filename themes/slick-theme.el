@@ -92,16 +92,12 @@
     `(sp-show-pair-match-face ((t (:background ,slick-blue-1))))
     `(sp-show-pair-mismatch-face ((t (:background ,slick-pink-1))))
 
-    ;; ivy
-    `(ivy-confirm-face ((t (:foreground ,slick-green-1))))
-    `(ivy-current-match-face ((t (:foreground ,slick-bw-3 :background ,slick-blue+1))))
-    `(ivy-match-required-face ((t (:foreground ,slick-pink+2))))
-    `(ivy-minibuffer-match-face-1 ((t (:background ,slick-bw-1))))
-    `(ivy-minibuffer-match-face-2 ((t (:background ,slick-blue-1))))
-    `(ivy-minibuffer-match-face-3 ((t (:background ,slick-blue-1))))
-    `(ivy-minibuffer-match-face-4 ((t (:background ,slick-pink-1))))
-    `(ivy-remote-face ((t (:foreground ,slick-blue+2))))
-    `(ivy-remote-face ((t (:foreground ,slick-blue+2))))
+    ;; vertico / orderless
+    `(vertico-current ((t (:foreground ,slick-bw-3 :background ,slick-blue+1))))
+    `(orderless-match-face-0 ((t (:background ,slick-bw-1))))
+    `(orderless-match-face-1 ((t (:background ,slick-blue-1))))
+    `(orderless-match-face-2 ((t (:background ,slick-blue-1))))
+    `(orderless-match-face-3 ((t (:background ,slick-pink-1))))
 
     ;; web-mode
     `(web-mode-html-tag-face ((t (:weight bold :foreground ,slick-pink-0))))

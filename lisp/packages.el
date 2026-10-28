@@ -11,56 +11,46 @@
   (doom-themes-visual-bell-config)
   (doom-themes-org-config))
 
-(use-package counsel)
+(use-package vertico
+  :init (vertico-mode 1)
+  :bind (("C-c C-r" . vertico-repeat)
+         ("<f6>" . vertico-repeat))
+  :hook (minibuffer-setup . vertico-repeat-save)
+  :config (require 'vertico-repeat))
 
-(use-package ivy
-  :config
-  (ivy-mode 1)
-  (defun ivy-magit-dir (x)
-    (print (concat "dir" (magit-toplevel (if (f-dir-p x) x (f-dirname x)))))
-    (with-ivy-window
-     (magit-status-internal (magit-toplevel (if (f-dir-p x) x (f-dirname x))))))
-
-  (require 'ivy)
-  (ivy-set-actions
-   'dired
-   '(("g" ivy-magit-dir "magit")))
-  (ivy-set-actions
-   'counsel-find-file
-   '(("g" ivy-magit-dir "magit")))
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-extra-directories '("../" "./"))
-  (setopt ivy-use-selectable-prompt t)
-  (global-set-key "\C-s" 'swiper)
-  (global-set-key (kbd "C-c C-r") 'ivy-resume)
-  (global-set-key (kbd "<f6>") 'ivy-resume)
-  (global-set-key (kbd "M-i") 'ivy-imenu-anywhere)
-  (global-set-key (kbd "M-x") 'counsel-M-x)
-  (global-set-key (kbd "C-x b") 'counsel-switch-buffer)
-  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
-  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-  (global-set-key (kbd "<f1> l") 'counsel-load-library)
-  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-  (global-set-key (kbd "C-c a") 'counsel-git)
-  (global-set-key (kbd "C-c j") 'counsel-git-grep)
-  (global-set-key (kbd "C-c k") 'counsel-ag)
-  (global-set-key (kbd "C-x l") 'counsel-locate)
-  (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
-  (define-key read-expression-map (kbd "C-r") 'counsel-expression-history))
-(use-package ivy-rich
-  :init
-  (ivy-rich-mode 1)
-  :config
-  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
-(use-package ivy-prescient
-  :after counsel
+(use-package orderless
   :custom
-  (ivy-prescient-enable-filtering nil)
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
+(use-package marginalia
+  :init (marginalia-mode 1))
+
+(use-package consult
+  :bind (("C-s" . consult-line)
+         ("C-x b" . consult-buffer)
+         ("M-i" . consult-imenu-multi)
+         ("C-c a" . project-find-file)
+         ("C-c j" . consult-git-grep)
+         ("C-x l" . consult-locate)
+         ("<f1> l" . load-library)
+         ("<f2> i" . info-lookup-symbol)
+         ("<f2> u" . insert-char)
+         :map read-expression-map
+         ("C-r" . consult-history)))
+
+(use-package embark
+  :bind (("C-." . embark-act))
   :config
-  (prescient-persist-mode 1)
-  (ivy-prescient-mode 1))
+  (defun -embark-magit-dir (file)
+    "Open magit-status for the repository containing FILE."
+    (magit-status-setup-buffer (magit-toplevel (if (file-directory-p file) file (file-name-directory file)))))
+  (define-key embark-file-map (kbd "g") #'-embark-magit-dir))
+
+(use-package embark-consult
+  :after (embark consult))
+
+(global-set-key (kbd "C-c k") 'ag)
 
 (use-package ag
   :config
@@ -74,7 +64,7 @@
   (projectile-mode)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   :config
-  (setq projectile-completion-system 'ivy)
+  (setq projectile-completion-system 'default)
   (add-to-list 'projectile-globally-ignored-files ".DS_Store")
   (add-to-list 'projectile-globally-ignored-files "node_modules/")
   (add-to-list 'projectile-globally-ignored-files ".yarn/")
@@ -82,8 +72,6 @@
   (add-to-list 'projectile-globally-ignored-files "*.bundle.js")
   (add-to-list 'projectile-globally-ignored-files "dist/")
   :bind (:map projectile-mode-map ("C-c p g" . ag-project)))
-(use-package counsel-projectile
-  :init (counsel-projectile-mode))
 (use-package dockerfile-mode
   :mode (("^Dockerfile" . dockerfile-mode)))
 

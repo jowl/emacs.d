@@ -7,13 +7,13 @@
      "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa"
      default))
  '(package-selected-packages
-   '(ag company copilot counsel-projectile dockerfile-mode
-        doom-modeline doom-themes drag-stuff exec-path-from-shell
+   '(ag company consult copilot dockerfile-mode
+        doom-modeline doom-themes drag-stuff embark embark-consult exec-path-from-shell
         git-gutter-fringe go-mode graphql-mode
-        ibuffer-vc ivy-prescient ivy-rich jq-mode js2-mode json-mode
-        lsp-mode lsp-ui magit multi-term multiple-cursors
-        nerd-icons-dired quelpa-use-package rainbow-mode
+        ibuffer-vc jq-mode js2-mode json-mode
+        lsp-mode lsp-ui magit marginalia multi-term multiple-cursors
+        nerd-icons-dired orderless quelpa-use-package rainbow-mode
         rspec-mode rustic tide
-        tree-sitter-langs typescript-mode unicode-fonts web-mode
+        tree-sitter-langs typescript-mode unicode-fonts vertico web-mode
         yasnippet)))
 (custom-set-faces)

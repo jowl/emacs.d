@@ -11,6 +11,7 @@
 - `magit-get-current-name` -> `magit-get-current-branch`.
 - Removed ~100 lines of commented-out code, duplicate `insert-directory-program`, debug `message` in `track-closed-file`.
 - `load-path` uses `user-emacs-directory`.
+- Completion stack: `ivy`/`counsel`/`swiper`/`prescient` replaced by `vertico` + `orderless` + `marginalia` + `consult` + `embark`; `counsel-*` keys remapped (`C-c k` still uses `ag` until the search migration).
 
 ## Planned (not yet applied; each is a behaviour change, do separately)
 
@@ -34,7 +35,6 @@
 - Measure first with `M-x use-package-report` (set `use-package-compute-statistics`).
 
 ### 4. Larger modernisation (one PR each)
-1. **Completion stack:** `ivy`/`counsel`/`swiper`/`prescient` -> `vertico` + `orderless` + `marginalia` + `consult` (+ `embark`). Rebind the `counsel-*` keys.
 2. **LSP and syntax:** `tree-sitter`/`tide`/`rustic`/`lsp-mode` -> built-in `treesit` modes + `eglot` (Emacs 29+). Use `rust-ts-mode` and `typescript-ts-mode`/`tsx-ts-mode`.
 3. **Diagnostics:** `flycheck` -> `flymake` (integrates with eglot).
 4. **Project:** `projectile` + `counsel-projectile` -> built-in `project.el` (+ `consult-project-buffer`).
