@@ -7,7 +7,7 @@
      "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa"
      default))
  '(package-selected-packages
-   '(ag company consult copilot dockerfile-mode
+   '(company consult copilot dockerfile-mode
         doom-modeline doom-themes drag-stuff embark embark-consult exec-path-from-shell
         git-gutter-fringe go-mode graphql-mode
         ibuffer-vc jq-mode js2-mode json-mode

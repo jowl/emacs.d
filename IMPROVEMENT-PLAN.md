@@ -12,6 +12,7 @@
 - Removed ~100 lines of commented-out code, duplicate `insert-directory-program`, debug `message` in `track-closed-file`.
 - `load-path` uses `user-emacs-directory`.
 - Completion stack: `ivy`/`counsel`/`swiper`/`prescient` replaced by `vertico` + `orderless` + `marginalia` + `consult` + `embark`; `counsel-*` keys remapped (`C-c k` still uses `ag` until the search migration).
+- Search: `ag` replaced by `consult-ripgrep` (`C-c k`, `C-c p g`); needs `rg` (`brew install ripgrep`).
 
 ## Planned (not yet applied; each is a behaviour change, do separately)
 
@@ -39,7 +40,6 @@
 3. **Diagnostics:** `flycheck` -> `flymake` (integrates with eglot).
 4. **Project:** `projectile` + `counsel-projectile` -> built-in `project.el` (+ `consult-project-buffer`).
 5. **Package install for non-ELPA:** replace `quelpa` for `copilot` with `:vc` (Emacs 30) or `package-vc-install`. Document Node + `M-x copilot-install-server` as setup steps.
-6. **Search:** `ag` -> `consult-ripgrep` / `rg.el`.
 
 ### 5. Documentation
 - Add a README with fresh-install steps: `nerd-icons-install-fonts`, `gls` (coreutils), Node for copilot, rbenv.

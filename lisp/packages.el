@@ -28,6 +28,7 @@
 
 (use-package consult
   :bind (("C-s" . consult-line)
+         ("C-c k" . consult-ripgrep)
          ("C-x b" . consult-buffer)
          ("M-i" . consult-imenu-multi)
          ("C-c a" . project-find-file)
@@ -37,7 +38,11 @@
          ("<f2> i" . info-lookup-symbol)
          ("<f2> u" . insert-char)
          :map read-expression-map
-         ("C-r" . consult-history)))
+         ("C-r" . consult-history))
+  :config
+  (setq consult-ripgrep-args
+        (concat consult-ripgrep-args
+                " --glob=!node_modules --glob=!vendor.js --glob=!public/assets")))
 
 (use-package embark
   :bind (("C-." . embark-act))
@@ -49,15 +54,6 @@
 
 (use-package embark-consult
   :after (embark consult))
-
-(global-set-key (kbd "C-c k") 'ag)
-
-(use-package ag
-  :config
-  (setq ag-highlight-search nil)
-  (setq ag-group-matches nil)
-  (setq ag-reuse-window t)
-  (setq ag-ignore-list (list "node_modules" "vendor.js" "public/assets")))
 
 (use-package projectile
   :init
@@ -71,7 +67,7 @@
   (add-to-list 'projectile-globally-ignored-files "*.min.js*")
   (add-to-list 'projectile-globally-ignored-files "*.bundle.js")
   (add-to-list 'projectile-globally-ignored-files "dist/")
-  :bind (:map projectile-mode-map ("C-c p g" . ag-project)))
+  :bind (:map projectile-mode-map ("C-c p g" . consult-ripgrep)))
 (use-package dockerfile-mode
   :mode (("^Dockerfile" . dockerfile-mode)))
 
