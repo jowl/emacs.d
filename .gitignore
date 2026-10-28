@@ -25,3 +25,5 @@ var
 /history
 /places
 /projects.eld
+*.eld
+/tree-sitter/
