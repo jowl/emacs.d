@@ -15,6 +15,7 @@
 - Search: `ag` replaced by `consult-ripgrep` (`C-c k`, `C-c p g`); needs `rg` (`brew install ripgrep`).
 - Project: `projectile` replaced by built-in `project.el` (`C-c p` prefix kept; `g` -> `consult-ripgrep`, `b` -> `consult-project-buffer`).
 - `quelpa` removed; `copilot` installs via `use-package :vc`. Setup needs Node and `M-x copilot-install-server`. On an existing install, delete the old `elpa/copilot-*` (quelpa-built) directory and restart to switch to the VC checkout.
+- LSP and syntax: `tree-sitter`/`tide`/`rustic`/`lsp-mode`/`typescript-mode` replaced by built-in `treesit` (`rust-ts-mode`, `typescript-ts-mode`, `tsx-ts-mode`) + `eglot`. Run `M-x -treesit-install-missing-grammars` once (needs git + a C compiler) and install `rust-analyzer` and `typescript-language-server`. Rustic cargo commands are gone (use `compile`).
 
 ## Planned (not yet applied; each is a behaviour change, do separately)
 
@@ -38,7 +39,6 @@
 - Measure first with `M-x use-package-report` (set `use-package-compute-statistics`).
 
 ### 4. Larger modernisation (one PR each)
-2. **LSP and syntax:** `tree-sitter`/`tide`/`rustic`/`lsp-mode` -> built-in `treesit` modes + `eglot` (Emacs 29+). Use `rust-ts-mode` and `typescript-ts-mode`/`tsx-ts-mode`.
 3. **Diagnostics:** `flycheck` -> `flymake` (integrates with eglot).
 
 ### 5. Documentation

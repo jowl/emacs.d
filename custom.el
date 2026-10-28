@@ -11,9 +11,8 @@
         doom-modeline doom-themes drag-stuff embark embark-consult exec-path-from-shell
         git-gutter-fringe go-mode graphql-mode
         ibuffer-vc jq-mode js2-mode json-mode
-        lsp-mode lsp-ui magit marginalia multi-term multiple-cursors
+        magit marginalia multi-term multiple-cursors
         nerd-icons-dired orderless rainbow-mode
-        rspec-mode rustic tide
-        tree-sitter-langs typescript-mode unicode-fonts vertico web-mode
+        rspec-mode unicode-fonts vertico web-mode
         yasnippet)))
 (custom-set-faces)

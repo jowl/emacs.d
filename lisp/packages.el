@@ -274,83 +274,50 @@
   :bind (("M-n" . drag-stuff-down)
          ("M-p" . drag-stuff-up)))
 
-(use-package typescript-mode
-  :after tree-sitter
-  :config
-  (setq typescript-indent-level 2)
-  ;; we choose this instead of tsx-mode so that eglot can automatically figure out language for server
-  ;; see https://github.com/joaotavora/eglot/issues/624 and https://github.com/joaotavora/eglot#handling-quirky-servers
-  (define-derived-mode typescriptreact-mode typescript-mode
-    "TypeScript TSX")
-
-  ;; use our derived mode for tsx files
-  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescriptreact-mode))
-  ;; by default, typescript-mode is mapped to the treesitter typescript parser
-  ;; use our derived mode to map both .tsx AND .ts -> typescriptreact-mode -> treesitter tsx
-  (add-to-list 'tree-sitter-major-mode-language-alist '(typescriptreact-mode . tsx)))
-
-(use-package tide
-  :config
-  ;; (add-hook 'before-save-hook 'tide-format-before-save)
-  (add-hook 'typescript-mode-hook (lambda ()
-                                    (interactive)
-                                    (tide-setup)
-                                    (flycheck-mode +1)
-                                    (eldoc-mode +1)
-                                    (tide-hl-identifier-mode +1)
-                                    (company-mode +1))))
-
 (use-package unicode-fonts
   :config
   (unicode-fonts-setup))
-
-(use-package tree-sitter
-  :config
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-
-(use-package tree-sitter-langs
-  :after tree-sitter)
 
 (use-package copilot
   :vc (:url "https://github.com/copilot-emacs/copilot.el" :rev :newest)
   :bind (("C-s-<return>" . copilot-accept-completion) ("C-s-<tab>" . copilot-next-completion) ("C-s-n" . copilot-accept-completion-by-line) ("C-s-f" . copilot-accept-completion-by-word)))
 
-(use-package lsp-mode
-  :commands lsp)
-
-(use-package lsp-ui
-  :after lsp-mode)
-
-(use-package rustic
-  :ensure
-  :bind (:map rustic-mode-map
-              ("M-j" . lsp-ui-imenu)
-              ("M-?" . lsp-find-references)
-              ("C-c C-c l" . flycheck-list-errors)
-              ("C-c C-c a" . lsp-execute-code-action)
-              ("C-c C-c r" . lsp-rename)
-              ("C-c C-c q" . lsp-workspace-restart)
-              ("C-c C-c Q" . lsp-workspace-shutdown)
-              ("C-c C-c s" . lsp-rust-analyzer-status))
+(use-package treesit
+  :ensure nil
+  :init
+  (setq treesit-language-source-alist
+        '((rust "https://github.com/tree-sitter/tree-sitter-rust" "v0.23.2")
+          (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "typescript/src")
+          (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "tsx/src")))
+  (setq treesit-font-lock-level 4)
+  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
   :config
-  ;; uncomment for less flashiness
-  ;; (setq lsp-eldoc-hook nil)
-  ;; (setq lsp-enable-symbol-highlighting nil)
-  ;; (setq lsp-signature-auto-activate nil)
+  (defun -treesit-install-missing-grammars ()
+    "Build the tree-sitter grammars listed in `treesit-language-source-alist'. Needs git and a C compiler."
+    (interactive)
+    (dolist (source treesit-language-source-alist)
+      (unless (treesit-language-available-p (car source))
+        (treesit-install-language-grammar (car source)))))
+  (setq typescript-ts-mode-indent-offset 2))
 
-  ;; comment to disable rustfmt on save
-  (setq rustic-format-on-save t)
-  (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook))
-
-(defun rk/rustic-mode-hook ()
-  ;; so that run C-c C-c C-r works without having to confirm, but don't try to
-  ;; save rust buffers that are not file visiting. Once
-  ;; https://github.com/brotzeit/rustic/issues/253 has been resolved this should
-  ;; no longer be necessary.
-  (when buffer-file-name
-    (setq-local buffer-save-without-query t))
-  (add-hook 'before-save-hook 'lsp-format-buffer nil t))
+(use-package eglot
+  :ensure nil
+  :hook ((rust-ts-mode typescript-ts-mode tsx-ts-mode) . eglot-ensure)
+  :bind (:map eglot-mode-map
+              ("M-j" . consult-imenu)
+              ("C-c C-c l" . flymake-show-buffer-diagnostics)
+              ("C-c C-c a" . eglot-code-actions)
+              ("C-c C-c r" . eglot-rename)
+              ("C-c C-c q" . eglot-reconnect)
+              ("C-c C-c Q" . eglot-shutdown))
+  :config
+  (defun -eglot-format-on-save ()
+    (add-hook 'before-save-hook
+              (lambda () (when (eglot-managed-p) (eglot-format-buffer)))
+              nil t))
+  (add-hook 'rust-ts-mode-hook #'-eglot-format-on-save))
 
 (use-package graphql-mode
   :mode ("\\.graphql\\'" "\\.gql\\'"))
