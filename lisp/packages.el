@@ -55,19 +55,14 @@
 (use-package embark-consult
   :after (embark consult))
 
-(use-package projectile
-  :init
-  (projectile-mode)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  :config
-  (setq projectile-completion-system 'default)
-  (add-to-list 'projectile-globally-ignored-files ".DS_Store")
-  (add-to-list 'projectile-globally-ignored-files "node_modules/")
-  (add-to-list 'projectile-globally-ignored-files ".yarn/")
-  (add-to-list 'projectile-globally-ignored-files "*.min.js*")
-  (add-to-list 'projectile-globally-ignored-files "*.bundle.js")
-  (add-to-list 'projectile-globally-ignored-files "dist/")
-  :bind (:map projectile-mode-map ("C-c p g" . consult-ripgrep)))
+(use-package project
+  :ensure nil
+  :bind-keymap ("C-c p" . project-prefix-map)
+  :bind (:map project-prefix-map
+              ("g" . consult-ripgrep)
+              ("b" . consult-project-buffer))
+  :custom
+  (project-vc-ignores '(".DS_Store" "node_modules/" ".yarn/" "*.min.js*" "*.bundle.js" "dist/")))
 (use-package dockerfile-mode
   :mode (("^Dockerfile" . dockerfile-mode)))
 

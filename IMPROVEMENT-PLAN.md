@@ -13,6 +13,7 @@
 - `load-path` uses `user-emacs-directory`.
 - Completion stack: `ivy`/`counsel`/`swiper`/`prescient` replaced by `vertico` + `orderless` + `marginalia` + `consult` + `embark`; `counsel-*` keys remapped (`C-c k` still uses `ag` until the search migration).
 - Search: `ag` replaced by `consult-ripgrep` (`C-c k`, `C-c p g`); needs `rg` (`brew install ripgrep`).
+- Project: `projectile` replaced by built-in `project.el` (`C-c p` prefix kept; `g` -> `consult-ripgrep`, `b` -> `consult-project-buffer`).
 
 ## Planned (not yet applied; each is a behaviour change, do separately)
 
@@ -38,7 +39,6 @@
 ### 4. Larger modernisation (one PR each)
 2. **LSP and syntax:** `tree-sitter`/`tide`/`rustic`/`lsp-mode` -> built-in `treesit` modes + `eglot` (Emacs 29+). Use `rust-ts-mode` and `typescript-ts-mode`/`tsx-ts-mode`.
 3. **Diagnostics:** `flycheck` -> `flymake` (integrates with eglot).
-4. **Project:** `projectile` + `counsel-projectile` -> built-in `project.el` (+ `consult-project-buffer`).
 5. **Package install for non-ELPA:** replace `quelpa` for `copilot` with `:vc` (Emacs 30) or `package-vc-install`. Document Node + `M-x copilot-install-server` as setup steps.
 
 ### 5. Documentation

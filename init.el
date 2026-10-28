@@ -132,7 +132,7 @@
 
 (defun frame-title-function ()
   (let ((title (if (buffer-file-name) '("%f") '("%b"))))
-    (if (projectile-project-p)
+    (if (project-current)
         (list title " - " (magit-get-current-branch))
       title)))
 
