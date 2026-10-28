@@ -313,10 +313,7 @@
   :after tree-sitter)
 
 (use-package copilot
-  :quelpa (copilot :fetcher github
-                   :repo "zerolfx/copilot.el"
-                   :branch "main"
-                   :files ("dist" "*.el"))
+  :vc (:url "https://github.com/copilot-emacs/copilot.el" :rev :newest)
   :bind (("C-s-<return>" . copilot-accept-completion) ("C-s-<tab>" . copilot-next-completion) ("C-s-n" . copilot-accept-completion-by-line) ("C-s-f" . copilot-accept-completion-by-word)))
 
 (use-package lsp-mode

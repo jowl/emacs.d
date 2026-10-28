@@ -17,9 +17,6 @@
 ;; Inspect load times with M-x use-package-report.
 (setq use-package-compute-statistics t)
 
-(use-package quelpa)
-(use-package quelpa-use-package)
-
 (use-package f)
 (use-package s)
 

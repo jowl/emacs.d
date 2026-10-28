@@ -14,6 +14,7 @@
 - Completion stack: `ivy`/`counsel`/`swiper`/`prescient` replaced by `vertico` + `orderless` + `marginalia` + `consult` + `embark`; `counsel-*` keys remapped (`C-c k` still uses `ag` until the search migration).
 - Search: `ag` replaced by `consult-ripgrep` (`C-c k`, `C-c p g`); needs `rg` (`brew install ripgrep`).
 - Project: `projectile` replaced by built-in `project.el` (`C-c p` prefix kept; `g` -> `consult-ripgrep`, `b` -> `consult-project-buffer`).
+- `quelpa` removed; `copilot` installs via `use-package :vc`. Setup needs Node and `M-x copilot-install-server`. On an existing install, delete the old `elpa/copilot-*` (quelpa-built) directory and restart to switch to the VC checkout.
 
 ## Planned (not yet applied; each is a behaviour change, do separately)
 
@@ -39,7 +40,6 @@
 ### 4. Larger modernisation (one PR each)
 2. **LSP and syntax:** `tree-sitter`/`tide`/`rustic`/`lsp-mode` -> built-in `treesit` modes + `eglot` (Emacs 29+). Use `rust-ts-mode` and `typescript-ts-mode`/`tsx-ts-mode`.
 3. **Diagnostics:** `flycheck` -> `flymake` (integrates with eglot).
-5. **Package install for non-ELPA:** replace `quelpa` for `copilot` with `:vc` (Emacs 30) or `package-vc-install`. Document Node + `M-x copilot-install-server` as setup steps.
 
 ### 5. Documentation
 - Add a README with fresh-install steps: `nerd-icons-install-fonts`, `gls` (coreutils), Node for copilot, rbenv.
