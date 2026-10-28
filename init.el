@@ -271,15 +271,15 @@ there's a region, all lines that region covers will be duplicated."
      "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa"
      default))
  '(package-selected-packages
-   '(ag all-the-icons-dired company copilot counsel-projectile
-        dash-at-point dockerfile-mode doom-modeline doom-themes
-        drag-stuff ess exec-path-from-shell flymd gist
-        git-gutter-fringe go-mode graphql-mode haskell-mode ibuffer-vc
-        ivy-prescient ivy-rich jq-mode js2-mode json-mode
+   '(ag company copilot counsel-projectile dash-at-point dockerfile-mode
+        doom-modeline doom-themes drag-stuff ess exec-path-from-shell
+        flymd gist git-gutter-fringe go-mode graphql-mode haskell-mode
+        ibuffer-vc ivy-prescient ivy-rich jq-mode js2-mode json-mode
         kubernetes-helm lsp-mode magit multi-term multiple-cursors
-        prettier quelpa-use-package rainbow-mode rspec-mode rustic
-        smart-mode-line svelte-mode tide tree-sitter-langs
-        typescript-mode unicode-fonts web-mode yasnippet)))
+        nerd-icons-dired prettier quelpa-use-package rainbow-mode
+        rspec-mode rustic smart-mode-line svelte-mode tide
+        tree-sitter-langs typescript-mode unicode-fonts web-mode
+        yasnippet)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

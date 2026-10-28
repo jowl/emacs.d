@@ -1,4 +1,4 @@
-;; run (all-the-icons-install-fonts) on fresh install
+;; run (nerd-icons-install-fonts) on fresh install
 (use-package doom-modeline
   :init
   (doom-modeline-mode 1))
@@ -91,9 +91,9 @@
   :ensure t
   :mode (("^Dockerfile" . dockerfile-mode)))
 
-(use-package all-the-icons)
-(use-package all-the-icons-dired
-  :hook (dired-mode . all-the-icons-dired-mode))
+(use-package nerd-icons)
+(use-package nerd-icons-dired
+  :hook (dired-mode . nerd-icons-dired-mode))
 
 (use-package flycheck
   :init
