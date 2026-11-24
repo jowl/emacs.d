@@ -1,5 +1,9 @@
 ;; Managed by Customize (see `custom-file' in init.el).
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223"
      "62f68a0b49cf383478041c688cc1b82f084f76b84a2ab2819a4ed9ceb59aefd8"
@@ -7,12 +11,15 @@
      "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa"
      default))
  '(package-selected-packages
-   '(company consult copilot dockerfile-mode
-        doom-modeline doom-themes drag-stuff embark embark-consult exec-path-from-shell
-        git-gutter-fringe go-mode graphql-mode
-        ibuffer-vc jq-mode js2-mode json-mode
-        magit marginalia multi-term multiple-cursors
-        nerd-icons-dired orderless rainbow-mode
-        rspec-mode unicode-fonts vertico web-mode
-        yasnippet)))
-(custom-set-faces)
+   '(company consult copilot dockerfile-mode doom-modeline doom-themes
+             drag-stuff embark embark-consult exec-path-from-shell
+             git-gutter-fringe go-mode graphql-mode ibuffer-vc jq-mode
+             js2-mode json-mode magit marginalia multi-term
+             multiple-cursors nerd-icons-dired orderless rainbow-mode
+             rg rspec-mode unicode-fonts vertico web-mode yasnippet)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

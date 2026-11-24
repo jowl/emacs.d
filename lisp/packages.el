@@ -63,6 +63,9 @@
               ("b" . consult-project-buffer))
   :custom
   (project-vc-ignores '(".DS_Store" "node_modules/" ".yarn/" "*.min.js*" "*.bundle.js" "dist/")))
+
+(use-package rg)
+
 (use-package dockerfile-mode
   :mode (("^Dockerfile" . dockerfile-mode)))
 
@@ -324,4 +327,3 @@
   :mode ("\\.graphql\\'" "\\.gql\\'"))
 
 (provide 'packages)
-
