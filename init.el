@@ -51,6 +51,8 @@
 (windmove-default-keybindings 'super)
 (column-number-mode t)
 (scroll-bar-mode -1)
+(setq cua-delete-copy-to-register-0 nil
+      delete-selection-save-to-register nil)
 (cua-selection-mode t)
 (show-paren-mode 1)
 (global-hl-line-mode 1)
